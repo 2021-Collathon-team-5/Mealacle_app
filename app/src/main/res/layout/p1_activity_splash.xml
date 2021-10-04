@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/logo_splash"
+        layout="@layout/p1_logo_splash"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:layout_gravity="center_vertical"/>
