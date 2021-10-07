@@ -20,6 +20,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/p2_content_univselect" />
+    <include
+        layout="@layout/p4_content_category"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
