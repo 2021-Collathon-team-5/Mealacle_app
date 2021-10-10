@@ -22,7 +22,7 @@
 
     <include
         android:id="@+id/include"
-        layout="@layout/p5_content_food" />
+        layout="@layout/p6_content_cart" />
 
 
 

@@ -10,12 +10,22 @@
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/p3_bottom_view"
         app:navGraph="@navigation/home_navigation"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/p3_bottom_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/p3_bottom_menu"
+        app:itemBackground="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
