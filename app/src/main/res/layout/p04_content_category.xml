@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/p4_app_toolbar_category">
+    tools:showIn="@layout/p04_app_toolbar_category">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

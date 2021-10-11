@@ -7,6 +7,6 @@
 
     <fragment
         android:id="@+id/nav_home"
-        tools:layout="@layout/p3_fragment_home"/>
+        tools:layout="@layout/p03_fragment_home"/>
 
 </navigation>

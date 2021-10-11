@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:weightSum="11"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/p5_app_toolbar_food">
+    tools:showIn="@layout/p05_app_toolbar_food">
 
     <ScrollView
         android:layout_height="0dp"

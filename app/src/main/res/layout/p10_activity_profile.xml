@@ -12,7 +12,7 @@
         android:background="@color/white">
 
         <include
-            layout="@layout/p6_app_toolbar_cart"/>
+            layout="@layout/p10_app_toolbar_profile"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

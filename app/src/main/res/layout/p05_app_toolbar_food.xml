@@ -21,6 +21,9 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
-        layout="@layout/p4_content_category"/>
+        android:id="@+id/include"
+        layout="@layout/p05_content_food" />
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
