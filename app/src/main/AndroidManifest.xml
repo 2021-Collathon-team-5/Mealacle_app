@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mealacle">
-        <activity android:name=".SplashActivity"
+        <activity android:name=".p1.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -20,6 +20,9 @@
         </activity>
 
         <activity android:name=".MainActivity">
+        </activity>
+
+        <activity android:name=".p2.UnivSelectActivity">
         </activity>
     </application>
 

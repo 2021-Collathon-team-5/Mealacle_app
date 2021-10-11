@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data class="UnivElementBinding">
+    <data class="BeforeElementBinding">
         <variable
             name="title"
             type="String" />
@@ -99,7 +99,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                android:background="@drawable/category_button_list"
+                android:background="@drawable/button_beforelist"
                 android:gravity="center"/>
 
 

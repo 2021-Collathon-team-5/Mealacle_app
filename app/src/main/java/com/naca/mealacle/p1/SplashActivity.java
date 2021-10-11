@@ -1,4 +1,4 @@
-package com.naca.mealacle;
+package com.naca.mealacle.p1;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,12 +7,18 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+
+import com.naca.mealacle.MainActivity;
+import com.naca.mealacle.R;
+import com.naca.mealacle.p2.UnivSelectActivity;
 
 public class SplashActivity extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.p01_activity_splash);
 
         Handler hd = new Handler(Looper.getMainLooper());
@@ -21,7 +27,7 @@ public class SplashActivity extends Activity {
 
     private class SplashHandler implements Runnable {
         public void run() {
-            startActivity(new Intent(getApplication(), MainActivity.class));
+            startActivity(new Intent(getApplication(), UnivSelectActivity.class));
             SplashActivity.this.finish();
         }
     }
