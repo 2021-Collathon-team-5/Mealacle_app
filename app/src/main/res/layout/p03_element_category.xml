@@ -16,12 +16,12 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:src="@drawable/ic_launcher_foreground"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="아시안 / 양식"
+            android:text="@{category}"
             android:textSize="13dp"
             android:textStyle="bold"
             android:textColor="@color/black"

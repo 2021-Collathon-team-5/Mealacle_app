@@ -24,6 +24,12 @@
 
         <activity android:name=".p2.UnivSelectActivity">
         </activity>
+
+        <activity android:name=".p3.HomeActivity">
+        </activity>
+
+        <activity android:name=".p4.CategoryActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -4,8 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="FoodElementBinding">
         <variable
-            name="title"
-            type="String" />
+            name="name"
+            type="String"/>
+
+        <variable
+            name="cost"
+            type="String"/>
     </data>
 
     <LinearLayout
@@ -22,14 +26,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="테스트테스트"
+            android:text="@{name}"
             android:textSize="15dp"
             android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="4,000원"
+            android:text="@{cost}"
             android:textColor="@color/hover"
             android:textStyle="bold"
             android:textSize="20dp"

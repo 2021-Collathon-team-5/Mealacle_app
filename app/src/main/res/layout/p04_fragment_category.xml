@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data class="CategoryFragmentBinding">
 
     </data>
 
@@ -13,10 +13,12 @@
             android:scrollbars="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sort"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodlist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

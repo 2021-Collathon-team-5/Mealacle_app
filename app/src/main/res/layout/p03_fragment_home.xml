@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/p03_app_toolbar_home">
 
-    <data>
+    <data class="HomeFragmentBinding">
 
     </data>
 
@@ -22,6 +26,7 @@
                 android:background="@color/buttondisable"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/category"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"/>
 
@@ -45,6 +50,7 @@
                 android:background="@color/text"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recent"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"/>
 
@@ -68,6 +74,7 @@
                 android:background="@color/text"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ordered"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"/>
 

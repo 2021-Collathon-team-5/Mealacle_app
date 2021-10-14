@@ -1,5 +1,6 @@
 package com.naca.mealacle.p2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.R;
 import com.naca.mealacle.databinding.UnivSelectBinding;
+import com.naca.mealacle.p3.HomeActivity;
+import com.naca.mealacle.p3.HomeFragment;
 
 public class UnivSelectActivity extends AppCompatActivity {
 
@@ -37,8 +40,9 @@ public class UnivSelectActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new LocationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                v.setHovered(true);
-
+                Intent intent = new Intent(getApplication(), HomeActivity.class);
+                startActivity(intent);
+                UnivSelectActivity.this.finish();
             }
         });
     }
