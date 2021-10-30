@@ -4,7 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="MenuElementBinding">
         <variable
-            name="title"
+            name="name_list"
+            type="String" />
+
+        <variable
+            name="cost_list"
             type="String" />
     </data>
 
@@ -30,7 +34,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:text="맥시탄 타코 파티팩"
+                android:text="@{name_list}"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -46,7 +50,7 @@
                     android:layout_width="230dp"
                     android:layout_height="match_parent"
                     android:paddingLeft="20dp"
-                    android:text="0000원"
+                    android:text="@{cost_list}"
                     android:textColor="@color/mealacle"
                     android:textStyle="bold"
                     android:textSize="20dp"

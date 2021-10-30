@@ -8,7 +8,6 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -43,6 +42,10 @@ public class CategoryActivity extends AppCompatActivity {
             categories[i] = new CategoryFragment();
         }
 
+        Bundle b = new Bundle(1);
+        b.putInt("pos", pos);
+        categories[pos].setArguments(b);
+
         transaction = fragmentManager.beginTransaction();
         transaction.replace(binding.toolbar.content.frame.getId(), categories[pos]).commitAllowingStateLoss();
 
@@ -61,6 +64,9 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
+                Bundle b = new Bundle(1);
+                b.putInt("pos", position);
+                categories[position].setArguments(b);
                 transaction = fragmentManager.beginTransaction();
                 transaction.replace(binding.toolbar.content.frame.getId(), categories[position]).commitAllowingStateLoss();
             }

@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Mealacle</string>
+
+    <string name="korean">한식</string>
+    <string name="chinese">중식</string>
+    <string name="cafe">카페 / 브런치</string>
+    <string name="japanese">일식</string>
+    <string name="asian">아시안</string>
+    <string name="snack">분식</string>
+    <string name="western">양식</string>
+    <string name="stew">탕 / 찌개</string>
+    <string name="midnight">야식</string>
 </resources>

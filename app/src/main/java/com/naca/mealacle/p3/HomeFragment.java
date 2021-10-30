@@ -18,6 +18,7 @@ import com.naca.mealacle.R;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.HomeToolbarBinding;
 import com.naca.mealacle.p4.CategoryActivity;
+import com.naca.mealacle.p5.ProductActivity;
 
 import java.util.LinkedList;
 
@@ -67,10 +68,20 @@ public class HomeFragment extends Fragment {
         FoodAdapter recentAdapter = new FoodAdapter(recentList);
         recent_recycler.setAdapter(recentAdapter);
 
+        recentAdapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(getContext(), ProductActivity.class);
+                intent.putExtra("select", recentList.get(position));
+                startActivity(intent);
+            }
+        });
+
         LinkedList<Food> orderedList = new LinkedList<>();
         sb = new StringBuilder();
 
-        for(int i = 0;i<5;i++){
+        for(int i = 0;i<7;i++){
+            sb.append("test");
             sb.append("test");
             orderedList.add(new Food(sb.toString(), i*1000));
         }
@@ -82,6 +93,14 @@ public class HomeFragment extends Fragment {
         FoodAdapter orderedAdapter = new FoodAdapter(orderedList);
         ordered_recycler.setAdapter(orderedAdapter);
 
+        orderedAdapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(getContext(), ProductActivity.class);
+                intent.putExtra("select", orderedList.get(position));
+                startActivity(intent);
+            }
+        });
 
         return view;
 

@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
+    <data class="FoodDetailBinding">
 
     </data>
 
@@ -12,6 +12,7 @@
         android:background="@color/white">
 
         <include
+            android:id="@+id/toolbar"
             layout="@layout/p05_app_toolbar_food"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
