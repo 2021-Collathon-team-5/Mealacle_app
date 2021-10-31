@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".p1.SplashActivity"
+        <activity android:name=".p01.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -22,16 +22,28 @@
         <activity android:name=".MainActivity">
         </activity>
 
-        <activity android:name=".p2.UnivSelectActivity">
+        <activity android:name=".p02.UnivSelectActivity">
         </activity>
 
-        <activity android:name=".p3.HomeActivity">
+        <activity android:name=".p03.HomeActivity">
         </activity>
 
-        <activity android:name=".p4.CategoryActivity">
+        <activity android:name=".p04.CategoryActivity">
         </activity>
 
-        <activity android:name=".p5.ProductActivity">
+        <activity android:name=".p05.ProductActivity">
+        </activity>
+
+        <activity android:name=".p06.BasketActivity">
+        </activity>
+
+        <activity android:name=".p07.OrderActivity">
+        </activity>
+
+        <activity android:name=".p09.NotifyActivity">
+        </activity>
+
+        <activity android:name=".p11.OrderedHistoryActivity">
         </activity>
     </application>
 

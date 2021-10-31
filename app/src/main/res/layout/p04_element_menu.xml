@@ -51,7 +51,7 @@
                     android:layout_height="match_parent"
                     android:paddingLeft="20dp"
                     android:text="@{cost_list}"
-                    android:textColor="@color/mealacle"
+                    android:textColor="@color/hover"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:gravity="center_vertical"/>

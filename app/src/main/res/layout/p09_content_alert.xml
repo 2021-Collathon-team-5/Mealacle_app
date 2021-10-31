@@ -1,48 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/p09_app_toolbar_alert">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="NotifyContentBinding">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/text"/>
-
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
+    </data>
+    <LinearLayout
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:showIn="@layout/p09_app_toolbar_alert">
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="1dp"
+            android:background="@color/text"/>
 
-            <androidx.recyclerview.widget.RecyclerView
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                android:overScrollMode="never"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="알람은 1달 후 자동으로 삭제됩니다."
-                android:textColor="@color/buttondisable"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_marginVertical="20dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/notify_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"/>
 
-        </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="알람은 1달 후 자동으로 삭제됩니다."
+                    android:textColor="@color/buttondisable"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_marginVertical="20dp"/>
 
-    </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
 
-</LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>
+
 

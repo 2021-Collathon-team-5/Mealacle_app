@@ -22,21 +22,20 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="100dp"
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:src="@drawable/ic_launcher_background"
-                    android:layout_margin="20dp"/>
+                    android:layout_margin="10dp"/>
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="285dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="5"
                     android:text="로그인을 해주세요"
-                    android:textSize="25dp"
+                    android:textSize="22dp"
                     android:textColor="@color/text"
                     android:textStyle="bold"
                     android:gravity="center_vertical"/>
@@ -45,7 +44,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
                     android:gravity="center_vertical"/>
 
             </LinearLayout>
@@ -55,9 +54,60 @@
                 android:layout_height="1dp"
                 android:background="@color/buttondisable"/>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"/>
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:id="@+id/ordered_list"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_baseline_outline_receipt_24"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="주문내역"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/alert"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/ic_baseline_notifications_none_24"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="알림"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -65,6 +115,7 @@
                 android:background="@color/buttondisable"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/inform_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -78,7 +129,7 @@
                 android:layout_height="80dp"
                 android:text="현재 버전 1.0.0"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="18dp"
                 android:gravity="center_vertical"
                 android:layout_marginHorizontal="20dp"/>
 

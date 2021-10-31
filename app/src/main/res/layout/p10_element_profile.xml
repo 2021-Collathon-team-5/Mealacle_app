@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="ProfileElementBinding">
         <variable
-            name="title"
+            name="inform"
             type="String" />
     </data>
 
@@ -14,12 +14,11 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="365dp"
             android:layout_height="80dp"
-            android:layout_weight="10"
-            android:text="현재 버전 1.0.0"
+            android:text="@{inform}"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:gravity="center_vertical"
             android:layout_marginLeft="20dp"/>
 
@@ -27,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/ic_launcher_background"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
             android:gravity="center"/>
 
 

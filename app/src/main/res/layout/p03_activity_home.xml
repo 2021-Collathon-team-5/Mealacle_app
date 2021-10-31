@@ -25,9 +25,12 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/p3_bottom_menu"
+            app:itemIconTint="@drawable/menu_selector"
+            app:itemTextColor="@drawable/menu_selector"
+            app:menu="@menu/p03_bottom_menu"
             app:itemBackground="@color/white"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
