@@ -3,38 +3,96 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data class="EmployContentBinding">
-        <variable
-            name="name_store"
-            type="String" />
+    <data class="DeliveryContentBinding">
 
-        <variable
-            name="address_store"
-            type="String" />
-
-        <variable
-            name="product_store"
-            type="String" />
-
-        <variable
-            name="cost_store"
-            type="String" />
-
-        <variable
-            name="time_store"
-            type="String" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/p14_app_toolbar_employ">
+        tools:showIn="@layout/p15_app_toolbar_delivery">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:paddingBottom="7dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="완료된 배달"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="26dp"
+                            android:text="5개"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="진행중인 배달"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="12dp"
+                            android:text="1개"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginBottom="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,7 +122,7 @@
                             android:layout_weight="5"
                             android:layout_marginLeft="10dp"
                             android:gravity="center_vertical"
-                            android:text="@{name_store}"
+                            android:text="방콕식당 충남대점"
                             android:textStyle="bold"
                             android:textSize="23dp"
                             android:textColor="@color/black"
@@ -76,7 +134,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="3"
                             android:layout_marginLeft="10dp"
-                            android:text="@{product_store}"
+                            android:text="월남쌈 쿠킹박스 밀키트 5개"
                             android:textSize="15dp"
                             android:textColor="@color/black"/>
 
@@ -98,7 +156,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:text="@{cost_store}"
+                                android:text="월남쌈 쿠킹박스 밀키트 5개"
                                 android:textSize="15dp"
                                 android:textColor="@color/black"/>
                         </LinearLayout>
@@ -121,7 +179,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:text="@{time_store}"
+                                android:text="오후 9:00"
                                 android:textSize="15dp"
                                 android:textColor="@color/black"/>
                         </LinearLayout>
@@ -131,7 +189,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="6"
                             android:layout_marginLeft="10dp"
-                            android:text="@{address_store}"
+                            android:text="대전광역시123123123 유성구 봉명동 566-8(봉명동)"
                             android:textSize="15dp"
                             android:textColor="@color/black"
                             android:gravity="bottom"/>
@@ -302,88 +360,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_launcher_background"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="유의사항"
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:paddingBottom="13dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mealacle은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 Mealacle은 상품, 거래 정보 및 거래에 책임을 지지 않습니다."
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:paddingBottom="13dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="배달 대행 상품은 반드시 30분이전에 수령하는 것이 원칙이며, 배달원과 업체 사이에 발생하는 문제에 대하여 Mealacle은 책임지지 않습니다."
-                    android:textSize="15dp"
-                    android:textColor="@color/black"
-                    android:paddingBottom="13dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="자세한 이용 사항은 Mealacle홈페이지 배달원 가이드를 확인해 주시길 바랍니다."
-                    android:textSize="15dp"
-                    android:textColor="@color/black"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:paddingVertical="10dp"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 개인정보 수집 및 이용 동의(필수)"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="17dp"
-                    android:paddingRight="77dp"
-                    android:gravity="center_vertical"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                    android:layout_gravity="center_vertical"/>
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/add_deliver"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/hover"
-                android:text="배달 수행"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:gravity="center"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="10dp"
-                android:clickable="true"/>
 
         </LinearLayout>
 

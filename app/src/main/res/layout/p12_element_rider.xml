@@ -4,11 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="RiderElementBinding">
         <variable
-            name="name_ordered"
+            name="name_rider"
             type="String" />
 
         <variable
-            name="cost_ordered"
+            name="address_rider"
+            type="String" />
+
+        <variable
+            name="product_rider"
+            type="String" />
+
+        <variable
+            name="cost_rider"
+            type="String" />
+
+        <variable
+            name="time_rider"
             type="String" />
     </data>
 
@@ -45,7 +57,7 @@
                         android:layout_weight="5"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
-                        android:text="방콕식당 충남대점"
+                        android:text="@{name_rider}"
                         android:textStyle="bold"
                         android:textSize="23dp"
                         android:textColor="@color/black"
@@ -57,7 +69,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="3"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{product_rider}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
 
@@ -79,7 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="월남쌈 쿠킹박스 밀키트 5개"
+                            android:text="@{cost_rider}"
                             android:textSize="15dp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
@@ -102,7 +114,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="오후 9:00"
+                            android:text="@{time_rider}"
                             android:textSize="15dp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
@@ -112,7 +124,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="6"
                         android:layout_marginLeft="10dp"
-                        android:text="대전광역시123123123 유성구 봉명동 566-8(봉명동)"
+                        android:text="@{address_rider}"
                         android:textSize="15dp"
                         android:textColor="@color/black"
                         android:gravity="bottom"/>

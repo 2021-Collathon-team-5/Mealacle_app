@@ -40,10 +40,22 @@
         <activity android:name=".p07.OrderActivity">
         </activity>
 
+        <activity android:name=".p08.OrderSuccessActivity">
+        </activity>
+
         <activity android:name=".p09.NotifyActivity">
         </activity>
 
         <activity android:name=".p11.OrderedHistoryActivity">
+        </activity>
+
+        <activity android:name=".p12.RiderActivity">
+        </activity>
+
+        <activity android:name=".p13.RiderPageActivity">
+        </activity>
+
+        <activity android:name=".p14.EmploymentActivity">
         </activity>
     </application>
 

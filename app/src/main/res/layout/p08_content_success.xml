@@ -1,47 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="SuccessContentBinding">
 
-    <TextView
+    </data>
+
+    <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="주문 완료!"
-        android:textSize="45dp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:layout_marginVertical="20dp"/>
+        android:orientation="vertical"
+        android:background="@color/white">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:src="@drawable/logo_hover"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주문 완료!"
+            android:textSize="45dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginVertical="20dp"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="주문은 오전 9시 오후 9시\n두차례에 걸쳐 배송됩니다."
-        android:textSize="25dp"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:layout_marginVertical="20dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:src="@drawable/logo_hover"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/hover"
-        android:layout_marginTop="100dp"
-        android:text="홈으로 돌아가기"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_marginHorizontal="30dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="주문은 오전 9시 오후 9시\n두차례에 걸쳐 배송됩니다."
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_marginVertical="20dp"/>
 
+        <TextView
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/hover"
+            android:layout_marginTop="100dp"
+            android:text="홈으로 돌아가기"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginHorizontal="30dp"
+            android:clickable="true"/>
 
-</LinearLayout>
+    </LinearLayout>
 
+</layout>

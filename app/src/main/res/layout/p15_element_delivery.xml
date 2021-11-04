@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data class="DeliveryElementBinding">
+        <variable
+            name="name_ordered"
+            type="String" />
+
+        <variable
+            name="cost_ordered"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="대전광역시 유성구 대학로 99(충남대학교) 기숙사 8동 401호"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="월남쌈 쿠킹박스 밀키트 2개"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:paddingVertical="10dp"/>
+
+        <TextView
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="배달중"
+            android:textColor="@color/white"
+            android:textSize="21dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:padding="5dp"
+            android:background="@color/hover"
+            android:layout_gravity="end"/>
+
+    </LinearLayout>
+</layout>

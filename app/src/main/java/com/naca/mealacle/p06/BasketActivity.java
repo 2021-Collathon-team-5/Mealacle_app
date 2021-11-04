@@ -1,5 +1,6 @@
 package com.naca.mealacle.p06;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.naca.mealacle.R;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.CartBinding;
+import com.naca.mealacle.p07.OrderActivity;
 
 import java.util.LinkedList;
 
@@ -37,11 +39,21 @@ public class BasketActivity extends AppCompatActivity {
         CartListAdapter mAdapter = new CartListAdapter(list);
         cart_recyclr.setAdapter(mAdapter);
 
-        TextView addMore = binding.toolbar.include.addmore;
+        View addMore = binding.toolbar.include.addmore;
         addMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        View gotoPurchase = binding.toolbar.include.gotoPurchase;
+        gotoPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
+                intent.putExtra("list", list);
+                startActivity(intent);
             }
         });
     }

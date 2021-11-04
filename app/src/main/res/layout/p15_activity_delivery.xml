@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data class="ReceiptBinding">
+    <data class="DeliveryBinding">
 
     </data>
 
@@ -13,7 +13,7 @@
 
         <include
             android:id="@+id/toolbar"
-            layout="@layout/p07_app_toolbar_receipt"/>
+            layout="@layout/p15_app_toolbar_delivery"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

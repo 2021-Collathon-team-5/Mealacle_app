@@ -15,9 +15,11 @@
         tools:showIn="@layout/p12_app_toolbar_rider">
 
         <LinearLayout
+            android:id="@+id/rider_info"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:clickable="true">
 
             <ImageView
                 android:layout_width="100dp"
@@ -107,6 +109,7 @@
             android:background="@color/black"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/store_recycle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </LinearLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,10 +18,14 @@ import com.naca.mealacle.R;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.FoodDetailBinding;
 import com.naca.mealacle.p06.BasketActivity;
+import com.naca.mealacle.p07.OrderActivity;
+
+import java.util.LinkedList;
 
 public class ProductActivity extends AppCompatActivity {
 
     private FoodDetailBinding binding;
+    private boolean isOrder = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,7 +38,6 @@ public class ProductActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
         Intent intent = getIntent();
         Food food = (Food) intent.getSerializableExtra("select");
         bind(food);
@@ -41,12 +45,44 @@ public class ProductActivity extends AppCompatActivity {
         binding.toolbar.content.purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                binding.toolbar.content.purchase.setVisibility(View.GONE);
+                binding.toolbar.content.order.setVisibility(View.VISIBLE);
+                isOrder = true;
             }
         });
 
+        binding.toolbar.content.gotoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(ProductActivity.this.getApplicationContext(),
+                        "장바구니에 담겼습니다.", Toast.LENGTH_SHORT);
+                toast.show();
+                finish();
+            }
+        });
 
+        binding.toolbar.content.gotoPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductActivity.this, OrderActivity.class);
+                LinkedList<Food> list = new LinkedList<>();
+                list.add(food);
+                intent.putExtra("list", list);
+                startActivity(intent);
+            }
+        });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(isOrder){
+            binding.toolbar.content.purchase.setVisibility(View.VISIBLE);
+            binding.toolbar.content.order.setVisibility(View.GONE);
+            isOrder = false;
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

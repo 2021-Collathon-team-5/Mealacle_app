@@ -4,11 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="RiderInfoElementBinding">
         <variable
-            name="name_ordered"
+            name="name_riderinfo"
             type="String" />
 
         <variable
-            name="cost_ordered"
+            name="address_riderinfo"
+            type="String" />
+
+        <variable
+            name="product_riderinfo"
+            type="String" />
+
+        <variable
+            name="cost_riderinfo"
+            type="String" />
+
+        <variable
+            name="time_riderinfo"
             type="String" />
     </data>
 

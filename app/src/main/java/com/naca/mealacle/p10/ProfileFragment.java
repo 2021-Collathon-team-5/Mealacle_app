@@ -17,6 +17,7 @@ import com.naca.mealacle.R;
 import com.naca.mealacle.databinding.ProfileToolbarBinding;
 import com.naca.mealacle.p09.NotifyActivity;
 import com.naca.mealacle.p11.OrderedHistoryActivity;
+import com.naca.mealacle.p12.RiderActivity;
 
 public class ProfileFragment extends Fragment {
 
@@ -34,9 +35,18 @@ public class ProfileFragment extends Fragment {
         inform_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         inform_recycler.setHasFixedSize(true);
 
-        String[] inform = {"공지사항", "이벤트", "고객센터", "환경설정", "약관 및 정책"};
+        String[] inform = {"공지사항", "이벤트", "고객센터", "라이더 관리", "환경설정", "약관 및 정책"};
 
         ProfileAdapter mAdapter = new ProfileAdapter(inform);
+        mAdapter.setOnItemClickListener(new ProfileAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                if(position == 3){
+                    Intent intent = new Intent(getContext(), RiderActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
         inform_recycler.setAdapter(mAdapter);
 
         binding.include.orderedList.setOnClickListener(new View.OnClickListener() {
