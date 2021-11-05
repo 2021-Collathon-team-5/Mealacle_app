@@ -9,6 +9,7 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.naca.mealacle.R;
 import com.naca.mealacle.p02.UnivSelectActivity;
 
@@ -22,6 +23,7 @@ public class SplashActivity extends Activity {
 
         Handler hd = new Handler(Looper.getMainLooper());
         hd.postDelayed(new SplashHandler(), 3000);
+
     }
 
     private class SplashHandler implements Runnable {

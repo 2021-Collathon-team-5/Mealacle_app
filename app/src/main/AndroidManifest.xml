@@ -57,6 +57,11 @@
 
         <activity android:name=".p14.EmploymentActivity">
         </activity>
+
+        <activity android:name=".p15.DeliveryActivity">
+        </activity>
+
+
     </application>
 
 </manifest>
