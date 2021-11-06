@@ -4,12 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="FoodElementBinding">
         <variable
-            name="name"
-            type="String"/>
-
-        <variable
-            name="cost"
-            type="String"/>
+            name="food_home"
+            type="com.naca.mealacle.data.Food"/>
     </data>
 
     <LinearLayout
@@ -21,19 +17,19 @@
         <ImageView
             android:layout_width="140dp"
             android:layout_height="140dp"
-            android:src="@drawable/ic_launcher_background"/>
+            android:setImage="@{food_home.imageID}"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@{name}"
+            android:text="@{food_home.name}"
             android:textSize="15dp"
             android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:text="@{cost}"
+            android:text="@{food_home.price}"
             android:textColor="@color/hover"
             android:textStyle="bold"
             android:textSize="20dp"

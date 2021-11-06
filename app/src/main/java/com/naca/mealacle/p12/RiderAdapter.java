@@ -70,11 +70,7 @@ public class RiderAdapter extends RecyclerView.Adapter<RiderAdapter.BindingViewH
         }
 
         public void bind(Store store) {
-            binding.setVariable(BR.name_rider, store.getName());
-            binding.setVariable(BR.product_rider, store.getProduct());
-            binding.setVariable(BR.cost_rider, store.getCost());
-            binding.setVariable(BR.time_rider, store.getTime());
-            binding.setVariable(BR.address_rider, store.getAddress());
+            binding.setVariable(BR.store_rider, store);
         }
     }
 }

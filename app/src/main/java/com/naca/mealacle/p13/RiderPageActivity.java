@@ -1,10 +1,13 @@
 package com.naca.mealacle.p13;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,12 +28,17 @@ public class RiderPageActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p13_activity_riderinfo);
         binding.setLifecycleOwner(this);
 
+        Toolbar toolbar = binding.toolbar.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         LinkedList<Store> list = new LinkedList<>();
         list.add(new Store("방콕식장", "대전광역시 유성구 봉명동 566-8 (봉명동)",
-                "월남쌈 쿠킹박스 밀키트", "2000원 (개당)", "오후 9:00"));
+                "월남쌈 쿠킹박스 밀키트", "2000원 (개당)", "오후 9:00", R.drawable.ic_launcher_background));
 
         list.add(new Store("카페713", "대전광역시 유성구 죽동 713-7 1층",
-                "티라미수 조각 케이크 세트 10개", "2000원 (개당)", "오후 9:00"));
+                "티라미수 조각 케이크 세트 10개", "2000원 (개당)", "오후 9:00", R.drawable.ic_launcher_background));
 
         RecyclerView store_recycle = binding.toolbar.include.storeRecycle;
         store_recycle.setLayoutManager(new LinearLayoutManager(this));
@@ -44,5 +52,16 @@ public class RiderPageActivity extends AppCompatActivity {
             }
         });
         store_recycle.setAdapter(mAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

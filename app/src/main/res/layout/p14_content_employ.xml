@@ -5,24 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data class="EmployContentBinding">
         <variable
-            name="name_store"
-            type="String" />
-
-        <variable
-            name="address_store"
-            type="String" />
-
-        <variable
-            name="product_store"
-            type="String" />
-
-        <variable
-            name="cost_store"
-            type="String" />
-
-        <variable
-            name="time_store"
-            type="String" />
+            name="store_detail"
+            type="com.naca.mealacle.data.Store" />
     </data>
 
     <ScrollView
@@ -50,7 +34,7 @@
                     <ImageView
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_launcher_background"
+                        android:setImage="@{store_detail.imageID}"
                         android:layout_gravity="center_vertical" />
 
                     <LinearLayout
@@ -64,7 +48,7 @@
                             android:layout_weight="5"
                             android:layout_marginLeft="10dp"
                             android:gravity="center_vertical"
-                            android:text="@{name_store}"
+                            android:text="@{store_detail.name}"
                             android:textStyle="bold"
                             android:textSize="23dp"
                             android:textColor="@color/black"
@@ -76,7 +60,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="3"
                             android:layout_marginLeft="10dp"
-                            android:text="@{product_store}"
+                            android:text="@{store_detail.product}"
                             android:textSize="15dp"
                             android:textColor="@color/black"/>
 
@@ -98,7 +82,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:text="@{cost_store}"
+                                android:text="@{store_detail.cost}"
                                 android:textSize="15dp"
                                 android:textColor="@color/black"/>
                         </LinearLayout>
@@ -121,7 +105,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:text="@{time_store}"
+                                android:text="@{store_detail.time}"
                                 android:textSize="15dp"
                                 android:textColor="@color/black"/>
                         </LinearLayout>
@@ -131,7 +115,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="6"
                             android:layout_marginLeft="10dp"
-                            android:text="@{address_store}"
+                            android:text="@{store_detail.address}"
                             android:textSize="15dp"
                             android:textColor="@color/black"
                             android:gravity="bottom"/>
@@ -171,7 +155,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="12dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_detail.product}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -193,7 +177,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_detail.productID}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -215,7 +199,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_detail.addTime}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -237,7 +221,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_detail.adderName}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -259,7 +243,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_detail.contract}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -276,7 +260,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:text="월남쌈 쿠킹박스 밀키트 5개"
+                    android:text="@{store_detail.size}"
                     android:textSize="15dp"
                     android:textColor="@color/black"/>
 
@@ -292,7 +276,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:text="월남쌈 쿠킹박스 밀키트 5개"
+                    android:text="@{store_detail.address}"
                     android:textSize="15dp"
                     android:textColor="@color/black"/>
             </LinearLayout>
@@ -300,7 +284,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"/>
+                android:setImage="@{store_detail.mapImageID}"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

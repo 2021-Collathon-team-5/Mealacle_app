@@ -1,9 +1,12 @@
 package com.naca.mealacle.p09;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +27,11 @@ public class NotifyActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p09_activity_alert);
         binding.setLifecycleOwner(this);
 
+        Toolbar toolbar = binding.toolbar.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         LinkedList<Alert> list = new LinkedList<>();
 
         StringBuilder sb = new StringBuilder();
@@ -39,4 +47,17 @@ public class NotifyActivity extends AppCompatActivity {
         NotifyAdapter mAdapter = new NotifyAdapter(list);
         notify_recycler.setAdapter(mAdapter);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
+

@@ -68,8 +68,7 @@ public class OrderedAdapter extends RecyclerView.Adapter<OrderedAdapter.BindingV
         }
 
         public void bind(Food food) {
-            binding.setVariable(BR.alert_title, food.getName());
-            binding.setVariable(BR.alert_content, Integer.toString(food.getCost()) + "원");
+            binding.setVariable(BR.food_ordered, food);
         }
     }
 }

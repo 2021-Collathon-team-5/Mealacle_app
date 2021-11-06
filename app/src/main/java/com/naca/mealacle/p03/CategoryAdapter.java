@@ -8,11 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.BR;
+import com.naca.mealacle.data.Category;
 import com.naca.mealacle.databinding.CategoryElementBinding;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.BindingViewHolder> {
 
-    private String[] foodList;
+    private Category[] categories;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -20,8 +21,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Bindin
 
     public static OnItemClickListener mListener = null;
 
-    public CategoryAdapter(String[] foodList) {
-        this.foodList = foodList;
+    public CategoryAdapter(Category[] categories) {
+        this.categories = categories;
     }
 
     @NonNull
@@ -33,12 +34,12 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Bindin
 
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
-        holder.bind(foodList[position]);
+        holder.bind(categories[position]);
     }
 
     @Override
     public int getItemCount() {
-        return foodList.length;
+        return categories.length;
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -64,8 +65,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Bindin
             });
         }
 
-        public void bind(String element) {
-            binding.setVariable(BR.category, element);
+        public void bind(Category category) {
+            binding.setVariable(BR.category, category);
         }
     }
 }

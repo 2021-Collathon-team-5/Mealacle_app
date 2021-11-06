@@ -68,8 +68,7 @@ public class NotifyAdapter extends RecyclerView.Adapter<NotifyAdapter.BindingVie
         }
 
         public void bind(Alert alert) {
-            binding.setVariable(BR.alert_title, alert.getTitle());
-            binding.setVariable(BR.alert_content, alert.getContent());
+            binding.setVariable(BR.alert, alert);
         }
     }
 }

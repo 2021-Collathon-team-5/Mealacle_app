@@ -2,26 +2,40 @@ package com.naca.mealacle.p02;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.R;
 import com.naca.mealacle.databinding.UnivSelectBinding;
 import com.naca.mealacle.p03.HomeActivity;
+import com.naca.mealacle.p04.CategoryActivity;
+
+import java.util.LinkedList;
 
 public class UnivSelectActivity extends AppCompatActivity {
 
     private UnivSelectBinding binding;
+    static View before_hovered = null;
+    static LinkedList<String> list = new LinkedList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.p02_activity_univselect);
         binding.setLifecycleOwner(this);
+
+        binding.toolbar.p2Content.search.setQueryHint("지역을 선택하세요");
+
+        Toolbar toolbar = binding.toolbar.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         String[] locations = {"전체", "서울", "인천", "대전", "세종", "광주", "대구", "울산", "부산",
                 "제주", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남"};
@@ -34,12 +48,40 @@ public class UnivSelectActivity extends AppCompatActivity {
         LocationAdapter mAdapter = new LocationAdapter(locations);
         location_recycler.setAdapter(mAdapter);
 
+        RecyclerView univ_recycler = binding.toolbar.p2Content.univRecycler;
+
+        univ_recycler.setLayoutManager(new LinearLayoutManager(this));
+        univ_recycler.setHasFixedSize(true);
+        list.clear();
+
+        UnivAdapter univAdapter = new UnivAdapter(list);
+        univ_recycler.setAdapter(univAdapter);
+
         mAdapter.setOnItemClickListener(new LocationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent intent = new Intent(getApplication(), HomeActivity.class);
+                if(before_hovered != null){
+                    before_hovered.setHovered(false);
+                }
+                Log.d("TEST", Boolean.toString(v.isEnabled()));
+                Log.d("TEST", Boolean.toString(v.isHovered()));
+                v.setHovered(true);
+                before_hovered = v;
+                binding.toolbar.p2Content.search.setInputType(1);
+                list.clear();
+                list.add("충남대학교");
+                list.add("KAIST");
+                univ_recycler.setAdapter(new UnivAdapter(list));
+            }
+        });
+
+        univAdapter.setOnItemClickListener(new UnivAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(UnivSelectActivity.this, HomeActivity.class);
+                intent.putExtra("univ", list.get(position));
                 startActivity(intent);
-                UnivSelectActivity.this.finish();
+                finish();
             }
         });
     }

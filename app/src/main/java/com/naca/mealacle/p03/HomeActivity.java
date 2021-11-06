@@ -32,10 +32,15 @@ public class HomeActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p03_activity_home);
         binding.setLifecycleOwner(this);
 
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+
         fragmentManager = getSupportFragmentManager();
 
         homeFragment = new HomeFragment();
         profileFragment = new ProfileFragment();
+
+        homeFragment.setArguments(b);
 
         transaction = fragmentManager.beginTransaction();
         transaction.replace(binding.frame.getId(), homeFragment).commitAllowingStateLoss();

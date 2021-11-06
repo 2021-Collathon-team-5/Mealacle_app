@@ -9,7 +9,6 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.naca.mealacle.R;
 import com.naca.mealacle.p02.UnivSelectActivity;
 

@@ -4,12 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="CartElementBinding">
         <variable
-            name="name_cart"
-            type="String" />
+            name="food_cart"
+            type="com.naca.mealacle.data.Food" />
 
-        <variable
-            name="cost_cart"
-            type="String" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -47,7 +44,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="5"
                         android:gravity="center_vertical"
-                        android:text="@{name_cart}"
+                        android:text="@{food_cart.name}"
                         android:textStyle="bold"
                         android:textSize="23dp"
                         android:textColor="@color/black"/>
@@ -78,7 +75,7 @@
                     android:layout_weight="1"
                     android:layout_marginVertical="10dp"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/ic_baseline_close_24"
                     android:scaleType="fitStart"/>
 
             </LinearLayout>
@@ -92,7 +89,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:setImage="@{food_cart.imageID}"
                     android:layout_gravity="center_vertical"/>
 
                 <LinearLayout
@@ -101,27 +98,53 @@
                     android:orientation="vertical"
                     android:layout_marginVertical="10dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_vertical"
-                        android:text="상품번호 48129371839"
-                        android:textStyle="bold"
-                        android:textSize="15dp"
-                        android:textColor="@color/black"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="상품번호"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_cart.productID}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center_vertical"
-                        android:text="제조사 푸드서플라이"
-                        android:textStyle="bold"
-                        android:textSize="15dp"
-                        android:textColor="@color/black"/>
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="제조사"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_cart.manufacture}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -134,7 +157,7 @@
                             android:layout_weight="2"
                             android:layout_marginLeft="10dp"
                             android:gravity="center_vertical"
-                            android:text="@{cost_cart}"
+                            android:text="@{food_cart.price}"
                             android:textStyle="bold"
                             android:textSize="20dp"
                             android:textColor="@color/hover"/>

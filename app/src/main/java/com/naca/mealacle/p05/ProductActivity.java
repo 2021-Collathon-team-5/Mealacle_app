@@ -35,7 +35,7 @@ public class ProductActivity extends AppCompatActivity {
 
         Toolbar toolbar = binding.toolbar.toolbar;
         setSupportActionBar(toolbar);
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Intent intent = getIntent();
@@ -108,7 +108,6 @@ public class ProductActivity extends AppCompatActivity {
     }
 
     public void bind(Food food){
-        binding.toolbar.content.setVariable(BR.name_detail, food.getName());
-        binding.toolbar.content.setVariable(BR.cost_detail, Integer.toString(food.getCost()) + "원");
+        binding.toolbar.content.setVariable(BR.food_detail, food);
     }
 }

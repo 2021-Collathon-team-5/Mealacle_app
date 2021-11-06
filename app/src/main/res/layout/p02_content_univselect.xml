@@ -41,13 +41,15 @@
                 android:layout_weight="6"
                 android:orientation="vertical">
 
-                <SearchView
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
-                    app:queryBackground="@drawable/searchview_background"
-                    app:queryHint="지역을 선택하세요"/>
+                    android:inputType="none"
+                    android:iconifiedByDefault="false"
+                    app:queryBackground="@drawable/searchview_background" />
 
                 <View
                     android:layout_width="match_parent"

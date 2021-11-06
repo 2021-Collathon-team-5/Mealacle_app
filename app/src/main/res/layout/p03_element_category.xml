@@ -5,24 +5,26 @@
     <data class="CategoryElementBinding">
         <variable
             name="category"
-            type="String" />
+            type="com.naca.mealacle.data.Category" />
     </data>
 
     <LinearLayout
-        android:layout_width="75dp"
-        android:layout_height="115dp"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="75dp"
-            android:src="@drawable/ic_launcher_foreground"/>
+            android:setImage="@{category.imageID}"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="10dp"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@{category}"
-            android:textSize="13dp"
+            android:layout_height="35dp"
+            android:text="@{category.name}"
+            android:textSize="14dp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center"

@@ -68,8 +68,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.BindingViewHol
         }
 
         public void bind(Food food) {
-            binding.setVariable(BR.name, food.getName());
-            binding.setVariable(BR.cost, Integer.toString(food.getCost()) + "원");
+            binding.setVariable(BR.food_home, food);
         }
     }
 }

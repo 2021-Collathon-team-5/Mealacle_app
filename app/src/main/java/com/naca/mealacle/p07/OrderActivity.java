@@ -4,10 +4,13 @@ import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +22,7 @@ import com.naca.mealacle.p08.OrderSuccessActivity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -38,8 +42,13 @@ public class OrderActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p07_activity_receipt);
         binding.setLifecycleOwner(this);
 
+        Toolbar toolbar = binding.toolbar.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
-        ArrayList<Food> list = (ArrayList<Food>) intent.getSerializableExtra("list");
+        List<Food> list = (List<Food>) intent.getSerializableExtra("list");
 
         RecyclerView order_recycler = binding.toolbar.include.orderRecycle;
         order_recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -116,5 +125,17 @@ public class OrderActivity extends AppCompatActivity {
             }
         });
         va.start();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

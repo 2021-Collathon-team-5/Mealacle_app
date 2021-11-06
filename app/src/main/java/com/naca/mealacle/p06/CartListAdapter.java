@@ -68,8 +68,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Bindin
         }
 
         public void bind(Food food) {
-            binding.setVariable(BR.name_cart, food.getName());
-            binding.setVariable(BR.cost_cart, Integer.toString(food.getCost()) + "원");
+            binding.setVariable(BR.food_cart, food);
         }
     }
 }

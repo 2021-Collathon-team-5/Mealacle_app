@@ -5,12 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data class="DetailContentBinding">
         <variable
-            name="name_detail"
-            type="String" />
-
-        <variable
-            name="cost_detail"
-            type="String" />
+            name="food_detail"
+            type="com.naca.mealacle.data.Food"/>
 
     </data>
 
@@ -35,7 +31,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:setImage="@{food_detail.imageID}"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -86,7 +82,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="@{name_detail}"
+                    android:text="@{food_detail.name}"
                     android:textSize="20dp"
                     android:textColor="@color/black"
                     android:gravity="center_vertical"
@@ -95,7 +91,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="@{cost_detail}"
+                    android:text="@{food_detail.price}"
                     android:textSize="20dp"
                     android:textColor="@color/hover"
                     android:textStyle="bold"
@@ -109,12 +105,141 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"/>
+                    android:layout_height="wrap_content"
+                    android:text="상품 정보"
+                    android:textColor="@color/black"
+                    android:textSize="23dp"
+                    android:textStyle="bold"
+                    android:padding="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
+                    android:paddingBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="상품번호"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_detail.productID}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="제조사"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_detail.manufacture}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="모델명"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_detail.model}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="브랜드"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_detail.brand}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="원산지"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_detail.origin}"
+                            android:textSize="16dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_launcher_background"
+                    android:setImage="@{food_detail.detailImageID}"
                     android:scaleType="centerCrop"/>
 
             </LinearLayout>

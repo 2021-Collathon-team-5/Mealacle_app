@@ -14,10 +14,11 @@ import com.naca.mealacle.databinding.ReceiptElementBinding;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BindingViewHolder> {
 
-    private ArrayList<Food> cartList;
+    private List<Food> cartList;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -25,7 +26,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BindingViewH
 
     public static OnItemClickListener mListener = null;
 
-    public OrderAdapter(ArrayList<Food> cartList) {
+    public OrderAdapter(List<Food> cartList) {
         this.cartList = cartList;
     }
 
@@ -70,7 +71,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BindingViewH
         }
 
         public void bind(Food food) {
-            binding.setVariable(BR.name_receipt, food.getName());
+            binding.setVariable(BR.food_receipt, food);
         }
     }
 }

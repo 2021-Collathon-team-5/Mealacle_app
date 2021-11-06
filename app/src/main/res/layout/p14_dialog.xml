@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <data class="DialogBinding">
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="500dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="배달 대행을 수행하시겠습니까?"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="19dp"
+            android:gravity="center"
+            android:padding="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="배달 상품은 반드시 30분 전에 수령해야 하며, 배달 대행 수행 과정에서 문제 발생시 불이익을 겪을수 있습니다."
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:paddingHorizontal="20dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="또한 이름, 전화번호, 주소지와 같은 개인정보가 소비자 보호법에 따라 업체에게 제공됩니다."
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:paddingVertical="20dp"
+            android:paddingHorizontal="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/left"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/buttondisable"
+                android:text="취소"
+                android:textColor="@color/white"
+                android:textSize="21dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/hover"
+                android:text="배달 수행"
+                android:textColor="@color/white"
+                android:textSize="21dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</layout>

@@ -4,6 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data class="HomeToolbarBinding">
+        <variable
+            name="title"
+            type="String" />
 
     </data>
 
@@ -16,17 +19,35 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:background="@color/mealacle"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:menu="@menu/p03_toolbar_menu">
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{title}"
+                    android:textColor="@color/black"
+                    android:textSize="21dp"
+                    android:layout_gravity="center"
+                    android:clickable="true"/>
+
+            </androidx.appcompat.widget.Toolbar>
 
             <SearchView
+                android:id="@+id/search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/mealacle"
-                app:queryBackground="@color/white"/>
+                android:iconifiedByDefault="false"
+                android:paddingBottom="5dp"
+                android:inputType="none"
+                app:queryBackground="@color/white" />
 
             <View
                 android:layout_width="match_parent"

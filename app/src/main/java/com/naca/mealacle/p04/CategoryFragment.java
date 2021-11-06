@@ -37,7 +37,7 @@ public class CategoryFragment extends Fragment {
         Bundle b = getArguments();
         int pos = b.getInt("pos");
         for(int i = 1;i<=pos;i++){
-            list.add(new Food("test", i*10000));
+            list.add(new Food("test", i*1000, R.drawable.ic_launcher_background));
         }
 
         RecyclerView food_recycler = binding.foodlist;

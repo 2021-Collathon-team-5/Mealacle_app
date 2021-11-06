@@ -4,12 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="OrderedElementBinding">
         <variable
-            name="name_ordered"
-            type="String" />
-
-        <variable
-            name="cost_ordered"
-            type="String" />
+            name="food_ordered"
+            type="com.naca.mealacle.data.Food" />
     </data>
 
         <LinearLayout
@@ -48,21 +44,34 @@
                         android:layout_weight="5"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
-                        android:text="@{name_ordered}"
+                        android:text="@{food_ordered.name}"
                         android:textStyle="bold"
                         android:textSize="21dp"
                         android:textColor="@color/black"
                         android:ellipsize="end"
                         android:singleLine="true"/>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="4"
-                        android:layout_marginLeft="10dp"
-                        android:text="상품번호: 3827594873"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"/>
+                        android:layout_marginLeft="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="상품 번호"
+                            android:textSize="18dp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:text="@{food_ordered.productID}"
+                            android:textSize="18dp"
+                            android:textColor="@color/black"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -76,7 +85,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:gravity="center_vertical"
-                            android:text="@{cost_ordered}"
+                            android:text="@{food_ordered.price}"
                             android:textSize="18dp"
                             android:textColor="@color/black"/>
 

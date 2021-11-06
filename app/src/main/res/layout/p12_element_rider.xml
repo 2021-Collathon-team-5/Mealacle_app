@@ -4,24 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="RiderElementBinding">
         <variable
-            name="name_rider"
-            type="String" />
-
-        <variable
-            name="address_rider"
-            type="String" />
-
-        <variable
-            name="product_rider"
-            type="String" />
-
-        <variable
-            name="cost_rider"
-            type="String" />
-
-        <variable
-            name="time_rider"
-            type="String" />
+            name="store_rider"
+            type="com.naca.mealacle.data.Store" />
     </data>
 
     <LinearLayout
@@ -43,7 +27,7 @@
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:setImage="@{store_rider.imageID}"
                     android:layout_gravity="center_vertical" />
 
                 <LinearLayout
@@ -57,7 +41,7 @@
                         android:layout_weight="5"
                         android:layout_marginLeft="10dp"
                         android:gravity="center_vertical"
-                        android:text="@{name_rider}"
+                        android:text="@{store_rider.name}"
                         android:textStyle="bold"
                         android:textSize="23dp"
                         android:textColor="@color/black"
@@ -69,7 +53,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="3"
                         android:layout_marginLeft="10dp"
-                        android:text="@{product_rider}"
+                        android:text="@{store_rider.product}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
 
@@ -91,7 +75,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{cost_rider}"
+                            android:text="@{store_rider.cost}"
                             android:textSize="15dp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
@@ -114,7 +98,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{time_rider}"
+                            android:text="@{store_rider.time}"
                             android:textSize="15dp"
                             android:textColor="@color/black"/>
                     </LinearLayout>
@@ -124,7 +108,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="6"
                         android:layout_marginLeft="10dp"
-                        android:text="@{address_rider}"
+                        android:text="@{store_rider.address}"
                         android:textSize="15dp"
                         android:textColor="@color/black"
                         android:gravity="bottom"/>

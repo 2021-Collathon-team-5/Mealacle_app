@@ -2,11 +2,14 @@ package com.naca.mealacle.p06;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,13 +30,18 @@ public class BasketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.p06_activity_cart);
 
+        Toolbar toolbar = binding.toolbar.toolbar;
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         RecyclerView cart_recyclr = binding.toolbar.include.cartRecycler;
         cart_recyclr.setLayoutManager(new LinearLayoutManager(this));
         cart_recyclr.setHasFixedSize(true);
 
         LinkedList<Food> list = new LinkedList<>();
         for(int i = 1;i<=5;i++){
-            list.add(new Food("test", i*10000));
+            list.add(new Food("test", i*10000, R.drawable.ic_launcher_background));
         }
 
         CartListAdapter mAdapter = new CartListAdapter(list);
@@ -56,5 +64,16 @@ public class BasketActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
