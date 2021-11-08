@@ -6,28 +6,67 @@ import android.widget.ImageView;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
+import com.naca.mealacle.R;
+
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Food implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String name = "0";
-    private String price = "0";
-    private String productID = "0";
-    private String manufacture = "0";
-    private String model = "0";
-    private String brand = "0";
-    private String origin = "0";
+    private String dbID = "";
+    private String name = "0"; // 상품 이름
+    private long price = 0; // 상품 가격
+    private String price_string;
+    private String productID = "0"; // 상품 번호
+    private String manufacture = "0"; // 제조사
+    private String origin = "0"; // 원산지
+    private List<HashMap<String, Object>> options;
 
+    private int imageID = R.drawable.ic_launcher_background; // 상품 이미지id << 방식 변경 예정
+    private int detailImageID = R.drawable.ic_launcher_background; // 상품 설명 이미지 id << 방식 변경 예정
 
-    private int imageID;
-    private int detailImageID;
+    private String images;
+    private String description;
+
+    public Food() {
+
+    }
+
+    public Food(String dbID, String name, long price, String images,
+                String description, List<HashMap<String, Object>> options, String origin){
+        setDbID(dbID);
+        setName(name);
+        setPrice(price);
+        setImageID(imageID);
+        setDetailImageID(imageID);
+        setImages(images);
+        setDescription(description);
+        setOptions(options);
+        setOrigin(origin);
+    }
 
     public Food(String name, int price, int imageID){
         setName(name);
         setPrice(price);
         setImageID(imageID);
         setDetailImageID(imageID);
+    }
+
+    public String getDbID() {
+        return dbID;
+    }
+
+    public void setDbID(String dbID) {
+        char[] idarr = dbID.toCharArray();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i<5;i++){
+            sb.append((int) idarr[i]);
+        }
+        this.dbID = sb.toString().substring(0, 10);
     }
 
     public String getName() {
@@ -38,25 +77,22 @@ public class Food implements Serializable {
         this.name = name;
     }
 
-    public String getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(price /1000);
-        sb.append(",");
-        if(price %1000 == 0){
-            sb.append("000원");
-        } else {
-            sb.append(price %1000);
-            sb.append("원");
-        }
-        this.price = sb.toString();
+    public void setPrice(long price) {
+        setPrice_string(price);
+        this.price = price;
     }
 
-    public void setCost(String cost) {
-        this.price = cost;
+    public String getPrice_string() {
+        return price_string;
+    }
+
+    public void setPrice_string(long price) {
+        DecimalFormat format = new DecimalFormat("###,###");
+        this.price_string = format.format(price) + "원";
     }
 
     public String getProductID() {
@@ -73,22 +109,6 @@ public class Food implements Serializable {
 
     public void setManufacture(String manufacture) {
         this.manufacture = manufacture;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     public String getOrigin() {
@@ -113,5 +133,29 @@ public class Food implements Serializable {
 
     public void setDetailImageID(int detailImageID) {
         this.detailImageID = detailImageID;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<HashMap<String, Object>> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<HashMap<String, Object>> options) {
+        this.options = options;
     }
 }

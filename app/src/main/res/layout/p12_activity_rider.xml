@@ -12,7 +12,7 @@
         android:background="@color/white">
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_12"
             layout="@layout/p12_app_toolbar_rider"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,9 +22,9 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/foodimage"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:setImage="@{food_menu.imageID}"
                 android:scaleType="centerCrop"/>
 
             <TextView
@@ -43,50 +43,41 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="230dp"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_weight="20"
                     android:paddingLeft="20dp"
-                    android:text="@{food_menu.price}"
+                    android:text="@{food_menu.price_string}"
                     android:textColor="@color/hover"
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:gravity="center_vertical"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="11"
                     android:orientation="horizontal"
                     android:layout_gravity="center_vertical">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_launcher_background"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_launcher_background"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_launcher_background"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_launcher_background"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_launcher_background"/>
+                    <RatingBar
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:isIndicator="true"
+                        android:progressTint="@color/hover"
+                        android:secondaryProgressTint="@color/hover"
+                        android:layout_gravity="center_vertical"
+                        android:rating="3.8"
+                        style="?android:attr/ratingBarStyleSmall"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="(13+)"/>
+                        android:text="(13+)"
+                        android:gravity="center"/>
 
                 </LinearLayout>
 

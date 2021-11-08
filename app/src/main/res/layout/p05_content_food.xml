@@ -29,51 +29,40 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:id="@+id/foodimage"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
-                    android:setImage="@{food_detail.imageID}"/>
+                    android:layout_height="400dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal"
-                    android:paddingLeft="250dp">
+                    android:layout_height="30dp"
+                    android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:layout_gravity="center_vertical">
+                        android:layout_gravity="end"
+                        android:paddingRight="10dp">
 
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_launcher_background"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_launcher_background"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_launcher_background"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_launcher_background"/>
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/ic_launcher_background"/>
+                        <RatingBar
+                            android:id="@+id/rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:numStars="5"
+                            android:stepSize="0.1"
+                            android:isIndicator="true"
+                            android:layout_marginRight="10dp"
+                            android:progressTint="@color/hover"
+                            android:secondaryProgressTint="@color/hover"
+                            android:layout_gravity="center"
+                            style="?android:attr/ratingBarStyleSmall"/>
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:text="(13+)"/>
+                            android:text="(13+)"
+                            android:gravity="center"/>
 
                     </LinearLayout>
 
@@ -91,7 +80,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="@{food_detail.price}"
+                    android:text="@{food_detail.price_string}"
                     android:textSize="20dp"
                     android:textColor="@color/hover"
                     android:textStyle="bold"
@@ -136,7 +125,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_detail.productID}"
+                            android:text="@{food_detail.dbID}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 
@@ -182,7 +171,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_detail.model}"
+                            android:text="@{food_detail.name}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 
@@ -192,22 +181,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:text="브랜드"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:text="@{food_detail.brand}"
-                            android:textSize="16dp"
-                            android:textColor="@color/black"/>
 
                     </LinearLayout>
 
@@ -237,9 +210,9 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/detailImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:setImage="@{food_detail.detailImageID}"
                     android:scaleType="centerCrop"/>
 
             </LinearLayout>
@@ -275,6 +248,7 @@
                     android:textSize="17dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/option_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"/>
 
@@ -283,14 +257,27 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="210dp"
                         android:layout_height="match_parent"
-                        android:text="기본가격: 4300원"
-                        android:textColor="@color/black"
-                        android:textSize="14dp"
-                        android:gravity="bottom"
-                        android:layout_margin="10dp"/>
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="가격"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:gravity="center"
+                            android:layout_marginVertical="5dp"/>
+                        <TextView
+                            android:id="@+id/total_cost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="@color/black"
+                            android:textSize="17dp"
+                            android:gravity="center"
+                            android:paddingHorizontal="10dp"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -301,6 +288,7 @@
                         android:layout_marginHorizontal="10dp">
 
                         <TextView
+                            android:id="@+id/decrease"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -310,15 +298,17 @@
                             android:gravity="center"/>
 
                         <TextView
+                            android:id="@+id/count"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="2"
+                            android:text="1"
                             android:textSize="20dp"
                             android:textColor="@color/black"
                             android:gravity="center"/>
 
                         <TextView
+                            android:id="@+id/increase"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -344,8 +334,9 @@
                         android:layout_weight="1"
                         android:text="장바구니에 담기"
                         android:textColor="@color/hover"
-                        android:textSize="25dp"
+                        android:textSize="19dp"
                         android:gravity="center"
+                        android:background="@drawable/p05_button_cart"
                         android:layout_marginRight="5dp"/>
 
                     <TextView
@@ -355,7 +346,7 @@
                         android:layout_weight="1"
                         android:text="바로구매"
                         android:textColor="@color/white"
-                        android:textSize="25dp"
+                        android:textSize="19dp"
                         android:gravity="center"
                         android:layout_marginLeft="5dp"
                         android:background="@color/hover"/>

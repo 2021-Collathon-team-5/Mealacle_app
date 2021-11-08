@@ -12,7 +12,7 @@
     <color name="hover">#FFFDD100</color>
     <color name="black">#FF000000</color>
     <color name="searchdisable">#FFACAAAB</color>
-    <color name="listtext">#FFF98C00</color>
+    <color name="sorttext">#FFF98C00</color>
     <color name="buttondisable">#FFD0CECF</color>
     <color name="clear">#FF70AD47</color>
 

@@ -1,5 +1,6 @@
 package com.naca.mealacle.p04;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,15 @@ import com.naca.mealacle.databinding.SortElementBinding;
 public class SortListAdapter extends RecyclerView.Adapter<SortListAdapter.BindingViewHolder> {
 
     private String[] sort;
+    private int selected_position = 0;
+
+    public int getSelected_position(){
+        return selected_position;
+    }
+
+    public void setSelected_position(int selected_position){
+        this.selected_position = selected_position;
+    }
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -31,9 +41,16 @@ public class SortListAdapter extends RecyclerView.Adapter<SortListAdapter.Bindin
         return new BindingViewHolder(binding);
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
+        if(position == selected_position){
+            holder.binding.getRoot().setSelected(true);
+        } else {
+            holder.binding.getRoot().setSelected(false);
+        }
         holder.bind(sort[position]);
+
     }
 
     @Override

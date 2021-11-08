@@ -36,6 +36,7 @@
                     android:orientation="vertical"
                     android:layout_weight="10"
                     android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
                     android:weightSum="13">
 
 
@@ -70,13 +71,15 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/delete"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:layout_marginVertical="10dp"
                     android:layout_marginRight="20dp"
                     android:src="@drawable/ic_baseline_close_24"
-                    android:scaleType="fitStart"/>
+                    android:scaleType="fitStart"
+                    android:clickable="true"/>
 
             </LinearLayout>
 
@@ -87,9 +90,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/foodimage"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:setImage="@{food_cart.imageID}"
                     android:layout_gravity="center_vertical"/>
 
                 <LinearLayout
@@ -116,7 +119,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_cart.productID}"
+                            android:text="@{food_cart.dbID}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 
@@ -157,7 +160,7 @@
                             android:layout_weight="2"
                             android:layout_marginLeft="10dp"
                             android:gravity="center_vertical"
-                            android:text="@{food_cart.price}"
+                            android:text="@{food_cart.price_string}"
                             android:textStyle="bold"
                             android:textSize="20dp"
                             android:textColor="@color/hover"/>
@@ -172,13 +175,15 @@
                             android:layout_marginHorizontal="10dp">
 
                             <TextView
+                                android:id="@+id/increase"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="-"
                                 android:textSize="17dp"
                                 android:textColor="@color/black"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:clickable="true"/>
 
                             <TextView
                                 android:layout_width="0dp"
@@ -190,13 +195,15 @@
                                 android:gravity="center"/>
 
                             <TextView
+                                android:id="@+id/decrease"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="+"
                                 android:textSize="17dp"
                                 android:textColor="@color/black"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:clickable="true"/>
 
                         </LinearLayout>
 

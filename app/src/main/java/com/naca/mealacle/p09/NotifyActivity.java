@@ -27,7 +27,7 @@ public class NotifyActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p09_activity_alert);
         binding.setLifecycleOwner(this);
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar09.toolbar09;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,7 +40,7 @@ public class NotifyActivity extends AppCompatActivity {
             list.add(new Alert(sb.toString(), sb.toString()));
         }
 
-        RecyclerView notify_recycler = binding.toolbar.include.notifyRecycler;
+        RecyclerView notify_recycler = binding.toolbar09.include.notifyRecycler;
         notify_recycler.setLayoutManager(new LinearLayoutManager(this));
         notify_recycler.setHasFixedSize(true);
 

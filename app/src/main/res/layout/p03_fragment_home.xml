@@ -84,9 +84,66 @@
                 android:layout_height="1dp"
                 android:background="@color/text"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"/>
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="50dp">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Mealacle은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 Mealacle은 상품, 거래 정보 및 거래에 책임을 지지 않습니다."
+                    android:textSize="11dp"
+                    android:textColor="@color/text"
+                    android:paddingBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="상호명: Mealacle"
+                    android:textSize="11dp"
+                    android:textColor="@color/text"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="대표 000 | 사업자 등록번호 000-00-00000"
+                    android:textSize="11dp"
+                    android:textColor="@color/text"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이메일 kura8165@gmail.com | 회사 번호 000-0000-0000"
+                    android:textSize="11dp"
+                    android:textColor="@color/text"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="주소 대전광역시 유성구 대학로 99 (충남대학교)"
+                    android:textSize="11dp"
+                    android:textColor="@color/text"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="통신판매번호: 0000-대전유성-0000"
+                    android:textSize="11dp"
+                    android:textColor="@color/text"
+                    android:paddingBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="사업자정보확인 | 이용약관 | 전자금융거래이용약관| 개인정보처리방침"
+                    android:textSize="11dp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

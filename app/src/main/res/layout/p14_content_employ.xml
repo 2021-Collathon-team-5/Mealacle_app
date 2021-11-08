@@ -334,9 +334,11 @@
                 android:orientation="horizontal">
 
                 <CheckBox
+                    android:id="@+id/checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"/>
+                    android:gravity="center_vertical"
+                    android:buttonTint="@color/hover"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -359,14 +361,15 @@
             <TextView
                 android:id="@+id/add_deliver"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/hover"
+                android:layout_height="45dp"
+                android:background="@drawable/p14_button"
                 android:text="배달 수행"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:gravity="center"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="10dp"
+                android:enabled="false"
                 android:clickable="true"/>
 
         </LinearLayout>

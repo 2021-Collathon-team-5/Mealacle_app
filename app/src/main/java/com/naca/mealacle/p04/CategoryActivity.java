@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,23 +14,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.library.baseAdapters.BR;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.naca.mealacle.R;
+import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.CategoryBinding;
+import com.naca.mealacle.p05.ProductActivity;
 import com.naca.mealacle.p06.BasketActivity;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class CategoryActivity extends AppCompatActivity {
 
     private CategoryBinding binding;
-    private FragmentManager fragmentManager;
-    private FragmentTransaction transaction;
-
-    private CategoryFragment[] categories = new CategoryFragment[9];
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private LinkedList<Food> list = new LinkedList<>();
+    private int selected_option = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,45 +54,32 @@ public class CategoryActivity extends AppCompatActivity {
         int pos = bundle.getInt("position");
         String univ = bundle.getString("univ");
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar04.toolbar04;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        binding.toolbar.setVariable(BR.univ, univ);
-
-        fragmentManager = getSupportFragmentManager();
-
-        for(int i = 0;i<categories.length;i++){
-            categories[i] = new CategoryFragment();
-        }
+        binding.toolbar04.setVariable(BR.univ, univ);
 
         Bundle b = new Bundle(1);
         b.putInt("pos", pos);
-        categories[pos].setArguments(b);
 
-        transaction = fragmentManager.beginTransaction();
-        transaction.replace(binding.toolbar.content.frame.getId(), categories[pos]).commitAllowingStateLoss();
-
-        TabLayout tabs = binding.toolbar.content.tabs;
+        TabLayout tabs = binding.toolbar04.content.tabs;
         new Handler().postDelayed(
                 new Runnable() {
                     @Override
                     public void run() {
                         Objects.requireNonNull(tabs.getTabAt(pos)).select();
+                        if (pos == 0){
+                            updateData();
+                        }
                     }
                 }, 100);
 
-        Log.d("TAB SIZE", Integer.toString(tabs.getTabCount()));
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                int position = tab.getPosition();
-                Bundle b = new Bundle(1);
-                b.putInt("pos", position);
-                categories[position].setArguments(b);
-                transaction = fragmentManager.beginTransaction();
-                transaction.replace(binding.toolbar.content.frame.getId(), categories[position]).commitAllowingStateLoss();
+                updateData();
             }
 
             @Override
@@ -93,6 +92,24 @@ public class CategoryActivity extends AppCompatActivity {
 
             }
         });
+
+        String[] sort = {"기본순", "별점순", "가격 높은 순", "가격 낮은 순"};
+
+        RecyclerView sort_recycler= binding.toolbar04.content.sort;
+        sort_recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        sort_recycler.setHasFixedSize(true);
+
+        SortListAdapter sortAdapter = new SortListAdapter(sort);
+        selected_option = sortAdapter.getSelected_position();
+        sortAdapter.setOnItemClickListener(new SortListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                sortAdapter.setSelected_position(position);
+                sortAdapter.notifyDataSetChanged();
+                selected_option = position;
+            }
+        });
+        sort_recycler.setAdapter(sortAdapter);
     }
 
     @Override
@@ -115,5 +132,45 @@ public class CategoryActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void updateData(){
+        CollectionReference docFood = db.collection("food");
+        docFood.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    list.clear();
+                    for(QueryDocumentSnapshot document : task.getResult()){
+                        Map<String, Object> data = document.getData();
+                        list.add(new Food(document.getId(),
+                                String.valueOf(data.get("name")),
+                                Long.parseLong(String.valueOf(data.get("price"))),
+                                String.valueOf(((List<String>)data.get("image")).get(0)),
+                                String.valueOf(data.get("description")),
+                                (List<HashMap<String, Object>>) data.get("options"),
+                                String.valueOf(data.get("origin"))));
+                    }
+                } else {
+                    Log.d("FAIL", "ERROR", task.getException());
+                }
+
+                RecyclerView food_recycler = binding.toolbar04.content.foodlist;
+                food_recycler.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));
+                food_recycler.setHasFixedSize(true);
+
+                Log.e("LIST_SIZE", Integer.toString(list.size()));
+                FoodListAdapter foodAdapter = new FoodListAdapter(list);
+                foodAdapter.setOnItemClickListener(new FoodListAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
+                        Intent intent = new Intent(CategoryActivity.this, ProductActivity.class);
+                        intent.putExtra("select", list.get(position));
+                        startActivity(intent);
+                    }
+                });
+                food_recycler.setAdapter(foodAdapter);
+            }
+        });
     }
 }

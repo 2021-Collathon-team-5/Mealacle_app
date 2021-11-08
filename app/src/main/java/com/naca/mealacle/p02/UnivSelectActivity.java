@@ -31,16 +31,16 @@ public class UnivSelectActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p02_activity_univselect);
         binding.setLifecycleOwner(this);
 
-        binding.toolbar.p2Content.search.setQueryHint("지역을 선택하세요");
+        binding.toolbar02.p2Content.search.setQueryHint("지역을 선택하세요");
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar02.toolbar02;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         String[] locations = {"전체", "서울", "인천", "대전", "세종", "광주", "대구", "울산", "부산",
                 "제주", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남"};
 
-        RecyclerView location_recycler = binding.toolbar.p2Content.locationRecycler;
+        RecyclerView location_recycler = binding.toolbar02.p2Content.locationRecycler;
 
         location_recycler.setLayoutManager(new GridLayoutManager(this, 4));
         location_recycler.setHasFixedSize(true);
@@ -48,7 +48,7 @@ public class UnivSelectActivity extends AppCompatActivity {
         LocationAdapter mAdapter = new LocationAdapter(locations);
         location_recycler.setAdapter(mAdapter);
 
-        RecyclerView univ_recycler = binding.toolbar.p2Content.univRecycler;
+        RecyclerView univ_recycler = binding.toolbar02.p2Content.univRecycler;
 
         univ_recycler.setLayoutManager(new LinearLayoutManager(this));
         univ_recycler.setHasFixedSize(true);
@@ -60,17 +60,17 @@ public class UnivSelectActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new LocationAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
+                list.clear();
                 if(before_hovered != null){
                     before_hovered.setHovered(false);
                 }
-                Log.d("TEST", Boolean.toString(v.isEnabled()));
-                Log.d("TEST", Boolean.toString(v.isHovered()));
                 v.setHovered(true);
                 before_hovered = v;
-                binding.toolbar.p2Content.search.setInputType(1);
-                list.clear();
-                list.add("충남대학교");
-                list.add("KAIST");
+                if(position == 3){
+                    binding.toolbar02.p2Content.search.setInputType(1);
+                    list.add("충남대학교");
+                    list.add("KAIST");
+                }
                 univ_recycler.setAdapter(new UnivAdapter(list));
             }
         });

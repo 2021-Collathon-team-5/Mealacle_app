@@ -9,19 +9,19 @@ import androidx.databinding.BindingAdapter;
 import java.io.Serializable;
 
 public class Store implements Serializable {
-    String name;
-    String address;
-    String product;
-    String cost;
-    String time;
-    String productID = "0";
-    String addTime = "0";
-    String adderName = "0";
-    String contract = "0";
-    String size = "가로 0cm / 세로 0cm / 높이 0cm";
+    private String name; // 가게 이름
+    private String address; // 가게 주소
+    private String product; // 배달해야하는 상품 명
+    private String cost; // 배달 단가
+    private String time; // 배달 시간
+    private String productID = "0"; // 상품번호
+    private String addTime = "0"; // 등록 시간
+    private String adderName = "0"; // 업체 사장 이름
+    private String contract = "0"; // 업체 사장 번호
+    private String size = "가로 0cm / 세로 0cm / 높이 0cm"; // 상품 크기
 
-    int imageID;
-    int mapImageID;
+    int imageID; // 상품 이미지 id << 방식 변경 예정
+    int mapImageID; // 매장 주소 이미지 id << 방식 변경 예정
 
     public Store(String name, String address, String product, String cost, String time, int imageID){
         this.name = name;

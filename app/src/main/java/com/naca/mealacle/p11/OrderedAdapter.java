@@ -16,6 +16,7 @@ import java.util.LinkedList;
 public class OrderedAdapter extends RecyclerView.Adapter<OrderedAdapter.BindingViewHolder> {
 
     private LinkedList<Food> orderedList;
+    private OrderedElementBinding binding;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);

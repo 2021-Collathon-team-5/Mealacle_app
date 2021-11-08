@@ -23,7 +23,7 @@
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-
+                app:tabIndicatorColor="@color/hover"
                 app:tabMode="scrollable">
 
                 <com.google.android.material.tabs.TabItem
@@ -69,13 +69,18 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/stew"/>
+                    android:text="@string/midnight"/>
 
 
             </com.google.android.material.tabs.TabLayout>
 
-            <FrameLayout
-                android:id="@+id/frame"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sort"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/foodlist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

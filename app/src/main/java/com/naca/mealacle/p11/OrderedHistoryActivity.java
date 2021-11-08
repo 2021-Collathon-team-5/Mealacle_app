@@ -30,7 +30,7 @@ public class OrderedHistoryActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p11_activity_ordered);
         binding.setLifecycleOwner(this);
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar11.toolbar11;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,7 +43,7 @@ public class OrderedHistoryActivity extends AppCompatActivity {
             list.add(new Food(sb.toString(), i*1000, R.drawable.ic_launcher_background));
         }
 
-        RecyclerView ordered_recycler = binding.toolbar.include.orderedRecycler;
+        RecyclerView ordered_recycler = binding.toolbar11.include.orderedRecycler;
         ordered_recycler.setLayoutManager(new LinearLayoutManager(this));
         ordered_recycler.setHasFixedSize(true);
 

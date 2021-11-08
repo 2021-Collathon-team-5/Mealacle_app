@@ -1,5 +1,6 @@
 package com.naca.mealacle.p13;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.naca.mealacle.R;
 import com.naca.mealacle.data.Store;
 import com.naca.mealacle.databinding.RiderInfoBinding;
+import com.naca.mealacle.p15.DeliveryActivity;
 
 import java.util.LinkedList;
 
@@ -28,7 +30,7 @@ public class RiderPageActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p13_activity_riderinfo);
         binding.setLifecycleOwner(this);
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar13.toolbar13;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -40,7 +42,7 @@ public class RiderPageActivity extends AppCompatActivity {
         list.add(new Store("카페713", "대전광역시 유성구 죽동 713-7 1층",
                 "티라미수 조각 케이크 세트 10개", "2000원 (개당)", "오후 9:00", R.drawable.ic_launcher_background));
 
-        RecyclerView store_recycle = binding.toolbar.include.storeRecycle;
+        RecyclerView store_recycle = binding.toolbar13.include.storeRecycle;
         store_recycle.setLayoutManager(new LinearLayoutManager(this));
         store_recycle.setHasFixedSize(true);
 
@@ -48,7 +50,9 @@ public class RiderPageActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new RiderPageAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-
+                Intent intent = new Intent(RiderPageActivity.this, DeliveryActivity.class);
+                intent.putExtra("delivery", list.get(position));
+                startActivity(intent);
             }
         });
         store_recycle.setAdapter(mAdapter);

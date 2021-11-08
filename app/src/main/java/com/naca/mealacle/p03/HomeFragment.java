@@ -1,7 +1,10 @@
 package com.naca.mealacle.p03;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -46,7 +49,7 @@ public class HomeFragment extends Fragment {
 
         univ = getArguments().getString("univ");
 
-        Toolbar toolbar = binding.toolbar;
+        Toolbar toolbar = binding.toolbar03;
 
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -147,6 +150,9 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("test", (new Food()).toString());
 
         return view;
     }

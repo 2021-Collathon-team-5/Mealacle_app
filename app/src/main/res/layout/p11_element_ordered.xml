@@ -85,14 +85,13 @@
                             android:layout_height="match_parent"
                             android:layout_weight="3"
                             android:gravity="center_vertical"
-                            android:text="@{food_ordered.price}"
+                            android:text="@{food_ordered.price_string}"
                             android:textSize="18dp"
                             android:textColor="@color/black"/>
 
                         <TextView
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="상품 준비중"
                             android:textSize="13dp"

@@ -13,7 +13,7 @@
         android:background="@color/white">
 
         <include
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_02"
             layout="@layout/p02_app_toolbar_univ"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

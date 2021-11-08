@@ -7,6 +7,9 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,7 +34,7 @@ public class EmploymentActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p14_activity_employ);
         binding.setLifecycleOwner(this);
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar14.toolbar14;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,12 +44,28 @@ public class EmploymentActivity extends AppCompatActivity {
         Log.d("NAME", store.getName());
         bind(store);
 
-        binding.toolbar.include.addDeliver.setOnClickListener(new View.OnClickListener() {
+        CheckBox checkBox = binding.toolbar14.include.checkbox;
+        TextView addDeliver = binding.toolbar14.include.addDeliver;
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    addDeliver.setEnabled(true);
+                } else {
+                    addDeliver.setEnabled(false);
+                }
+            }
+        });
+
+        addDeliver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Dialog();
             }
         });
+
+
     }
 
     public void Dialog(){
@@ -72,8 +91,8 @@ public class EmploymentActivity extends AppCompatActivity {
     };
 
     private void bind(Store store){
-        binding.toolbar.setVariable(BR.store, store.getName());
-        binding.toolbar.include.setVariable(BR.store_detail, store);
+        binding.toolbar14.setVariable(BR.store, store.getName());
+        binding.toolbar14.include.setVariable(BR.store_detail, store);
     }
 
     @Override

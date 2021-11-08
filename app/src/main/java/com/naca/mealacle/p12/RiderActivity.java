@@ -31,7 +31,7 @@ public class RiderActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.p12_activity_rider);
         binding.setLifecycleOwner(this);
 
-        Toolbar toolbar = binding.toolbar.toolbar;
+        Toolbar toolbar = binding.toolbar12.toolbar12;
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,7 +43,7 @@ public class RiderActivity extends AppCompatActivity {
         list.add(new Store("카페713", "대전광역시 유성구 죽동 713-7 1층",
                 "티라미수 조각 케이크 세트 10개", "2000원 (개당)", "오후 9:00", R.drawable.ic_launcher_background));
 
-        RecyclerView store_recycle = binding.toolbar.include.storeRecycle;
+        RecyclerView store_recycle = binding.toolbar12.include.storeRecycle;
         store_recycle.setLayoutManager(new LinearLayoutManager(this));
         store_recycle.setHasFixedSize(true);
 
@@ -58,7 +58,7 @@ public class RiderActivity extends AppCompatActivity {
         });
         store_recycle.setAdapter(mAdapter);
 
-        binding.toolbar.include.riderInfo.setOnClickListener(new View.OnClickListener() {
+        binding.toolbar12.include.riderInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RiderActivity.this, RiderPageActivity.class);
