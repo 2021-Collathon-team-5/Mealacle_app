@@ -3,7 +3,7 @@ package com.naca.mealacle.data;
 public class Alert {
     String title;
     String content;
-    String date = "0000-00-00";
+    String date = "2021-11-13";
 
     public Alert(String title, String content){
         this.title = title;

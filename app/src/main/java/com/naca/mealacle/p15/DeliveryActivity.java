@@ -96,7 +96,6 @@ public class DeliveryActivity extends AppCompatActivity {
         binding.toolbar15.include.setVariable(BR.store_delivery, store);
 
         foodImage = binding.toolbar15.include.image;
-        mapImage = binding.toolbar15.include.mapImage;
 
         Thread mThread = new Thread() {
             @Override
@@ -125,7 +124,6 @@ public class DeliveryActivity extends AppCompatActivity {
         try {
             mThread.join();
             foodImage.setImageBitmap(foodBitmap);
-            mapImage.setImageBitmap(detailBitmap);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -202,7 +200,7 @@ public class DeliveryActivity extends AppCompatActivity {
                                 if(d.getOrder().isComplete()){
                                     clear++;
                                 } else {
-                                    progress++;
+                                    progress--;
                                 }
                             }
 

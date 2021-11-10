@@ -25,7 +25,8 @@ public class Food implements Serializable {
     private String origin = "0"; // 원산지
     private long price = 0; // 상품 가격
     private HashMap<String, Object> seller;
-    private double rating = Math.random() * 5;
+    private double rating = Math.random() + 4;
+    private int mention = (int) (Math.random() * 100);
 
     private String dbID = "";
     private String price_string;
@@ -57,10 +58,11 @@ public class Food implements Serializable {
     }
 
     public Food(String name, int price, int imageID){
-        setName(name);
-        setPrice(price);
+
+        this.name = name;
+        this.price = price;
         setImageID(imageID);
-        setDetailImageID(imageID);
+        setPrice_string(this.price);
     }
 
     public String getDbID() {
@@ -198,5 +200,17 @@ public class Food implements Serializable {
         DecimalFormat format = new DecimalFormat("###,###");
 
         return format.format(Integer.parseInt(String.valueOf(options.get(option).get("price")))) + "원";
+    }
+
+    public int getMention() {
+        return mention;
+    }
+
+    public void setMention(int mention) {
+        this.mention = mention;
+    }
+
+    public String getSellerName(){
+        return String.valueOf(seller.get("profile_name"));
     }
 }

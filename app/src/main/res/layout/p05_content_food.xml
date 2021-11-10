@@ -148,7 +148,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_detail.manufacture}"
+                            android:text="@{food_detail.sellerName}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 

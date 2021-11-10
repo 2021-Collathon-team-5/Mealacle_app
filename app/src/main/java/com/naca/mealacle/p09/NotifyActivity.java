@@ -34,11 +34,10 @@ public class NotifyActivity extends AppCompatActivity {
 
         LinkedList<Alert> list = new LinkedList<>();
 
-        StringBuilder sb = new StringBuilder();
-        for(int i = 0;i<3;i++){
-            sb.append("월남쌈 쿠킹박스 밀키트");
-            list.add(new Alert(sb.toString(), sb.toString()));
-        }
+        list.add(new Alert("주문이 완료되었습니다.", "주문은 오전 9시와 오후 9시, 하루에 2번에 걸쳐 배송됩니다."));
+        list.add(new Alert("Mealacle 이벤트", "Mealacle앱을 사용하고 플레이 스토어에 후기를 남겨주면 추첨을 통해 상품을 드립니다!!"));
+        list.add(new Alert("Mealacle 정식 오픈!", "코로나 시대. 이제 하루에 2번 편하게 코로나 밀키트 세트를 받아보세요 :)"));
+
 
         RecyclerView notify_recycler = binding.toolbar09.include.notifyRecycler;
         notify_recycler.setLayoutManager(new LinearLayoutManager(this));

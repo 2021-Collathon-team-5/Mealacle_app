@@ -71,7 +71,7 @@ public class User implements Serializable {
     }
 
     public int getImageID() {
-        return imageID;
+        return R.drawable.user_default;
     }
 
     public List<String> getOrderList() {

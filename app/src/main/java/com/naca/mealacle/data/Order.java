@@ -16,8 +16,8 @@ public class Order {
 
     }
 
-    public Order(String foodID, String userID, String riderID, String sellerID, int count,
-                 int option, int profile_idx, boolean isAssigned, boolean isReady, boolean isComplete) {
+    public Order(String foodID, String userID, String riderID, String sellerID, int count, int option,
+                 int profile_idx, boolean isAssign, boolean isReady, boolean isComplete) {
         this.foodID = foodID;
         this.userID = userID;
         this.riderID = riderID;
@@ -25,7 +25,7 @@ public class Order {
         this.count = count;
         this.option = option;
         this.profile_idx = profile_idx;
-        this.isAssign = isAssigned;
+        this.isAssign = isAssign;
         this.isReady = isReady;
         this.isComplete = isComplete;
     }
@@ -106,7 +106,7 @@ public class Order {
         return isComplete;
     }
 
-    public void setComplete(boolean iscomplete) {
-        this.isComplete = iscomplete;
+    public void setComplete(boolean complete) {
+        isComplete = complete;
     }
 }

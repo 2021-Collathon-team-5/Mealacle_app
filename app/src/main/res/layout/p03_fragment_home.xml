@@ -21,9 +21,10 @@
             android:scrollbars="vertical"
             android:background="@color/white">
 
-            <View
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:background="@color/buttondisable"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -53,7 +54,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recent"
                 android:layout_width="match_parent"
-                android:layout_height="270dp"/>
+                android:layout_height="wrap_content"/>
 
             <View
                 android:layout_width="match_parent"
@@ -77,7 +78,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ordered"
                 android:layout_width="match_parent"
-                android:layout_height="270dp"/>
+                android:layout_height="wrap_content"/>
 
             <View
                 android:layout_width="match_parent"

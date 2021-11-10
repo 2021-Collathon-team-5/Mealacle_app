@@ -78,7 +78,7 @@ public class RiderActivity extends AppCompatActivity {
 
         Handler hd = new Handler(Looper.getMainLooper());
         hd.postDelayed(new FoodHandler(), 200);
-        hd.postDelayed(new RiderHandler(), 700);
+        hd.postDelayed(new RiderHandler(), 1000);
         hd.postDelayed(new AdaptHandler(), 2000);
     }
 
@@ -125,7 +125,11 @@ public class RiderActivity extends AppCompatActivity {
         public void run() {
             for(int i = 0;i<orderList.size();i++){
                 Order order = orderList.get(i);
-                if(!order.isReady() && order.isAssign()){
+                Log.e("ready", Boolean.toString(!order.isReady()));
+                Log.e("assign", Boolean.toString(order.isAssign()));
+                Log.e("total", Boolean.toString(!order.isReady() || order.isAssign()));
+                if(!order.isReady() || order.isAssign()){
+                    Log.e("ready", Boolean.toString(order.isReady()));
                     continue;
                 }
                 Store store = new Store();
@@ -145,7 +149,6 @@ public class RiderActivity extends AppCompatActivity {
                                             break;
                                         }
                                     }
-                                    Log.d("TEST", Boolean.toString(temp[0]));
                                     if(temp[0]){
                                         food[0] = new Food(doc.getId(),
                                                 String.valueOf(data.get("category")),
