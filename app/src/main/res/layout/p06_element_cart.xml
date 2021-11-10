@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data class="CartElementBinding">
         <variable
-            name="food_cart"
-            type="com.naca.mealacle.data.Food" />
+            name="cart"
+            type="com.naca.mealacle.data.CartProduct" />
 
     </data>
 
@@ -45,28 +45,58 @@
                         android:layout_height="0dp"
                         android:layout_weight="5"
                         android:gravity="center_vertical"
-                        android:text="@{food_cart.name}"
+                        android:text="@{cart.food.name}"
                         android:textStyle="bold"
-                        android:textSize="23dp"
+                        android:textSize="21dp"
                         android:textColor="@color/black"/>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="- 기본가 (4300원)"
-                        android:textSize="15dp"
-                        android:textColor="@color/black"/>
+                        android:orientation="horizontal">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="- 기본가 "
+                            android:textSize="15dp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@{cart.food.price_string}"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="4"
-                        android:gravity="center_vertical"
-                        android:text="- 옵션2 (추가 500원)"
-                        android:textSize="15dp"
-                        android:textColor="@color/black"/>
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="- 옵션 "
+                            android:textSize="15dp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@{cart.food.getOptionPrice(cart.option)}"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -99,7 +129,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginVertical="10dp">
+                    android:layout_marginBottom="10dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -119,7 +149,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_cart.dbID}"
+                            android:text="@{cart.food.productID}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 
@@ -143,7 +173,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_cart.manufacture}"
+                            android:text="@{cart.food.manufacture}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 
@@ -155,12 +185,13 @@
                         android:layout_weight="2">
 
                         <TextView
+                            android:id="@+id/total"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="2"
                             android:layout_marginLeft="10dp"
                             android:gravity="center_vertical"
-                            android:text="@{food_cart.price_string}"
+                            android:text="@{cart.total}"
                             android:textStyle="bold"
                             android:textSize="20dp"
                             android:textColor="@color/hover"/>
@@ -175,7 +206,7 @@
                             android:layout_marginHorizontal="10dp">
 
                             <TextView
-                                android:id="@+id/increase"
+                                android:id="@+id/decrease"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -186,16 +217,17 @@
                                 android:clickable="true"/>
 
                             <TextView
+                                android:id="@+id/count"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="2"
+                                android:text="@{Integer.toString(cart.count)}"
                                 android:textSize="20dp"
                                 android:textColor="@color/black"
                                 android:gravity="center"/>
 
                             <TextView
-                                android:id="@+id/decrease"
+                                android:id="@+id/increase"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"

@@ -7,6 +7,9 @@
         <variable
             name="cost"
             type="String" />
+        <variable
+            name="user"
+            type="com.naca.mealacle.data.User" />
 
     </data>
 
@@ -73,21 +76,21 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="홍길동"
+                            android:text="@{user.name}"
                             android:textColor="@color/text"
                             android:textSize="17dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="test@gmail.com"
+                            android:text="@{user.address}"
                             android:textColor="@color/text"
                             android:textSize="17dp"/>
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="010-0000-0000"
+                            android:text="@{user.phone}"
                             android:textColor="@color/text"
                             android:textSize="17dp"/>
 
@@ -199,6 +202,7 @@
                                 android:textSize="20dp"/>
 
                             <TextView
+                                android:id="@+id/order_price"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="00000원"
@@ -222,7 +226,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="-0원"
+                                android:text="- 0원"
                                 android:textColor="@color/black"
                                 android:textSize="20dp"
                                 android:gravity="end"/>
@@ -247,6 +251,7 @@
                                 android:textSize="20dp"/>
 
                             <TextView
+                                android:id="@+id/total_price"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="00000원"

@@ -13,16 +13,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.R;
+import com.naca.mealacle.data.User;
 import com.naca.mealacle.databinding.UnivSelectBinding;
 import com.naca.mealacle.p03.HomeActivity;
 import com.naca.mealacle.p04.CategoryActivity;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class UnivSelectActivity extends AppCompatActivity {
 
     private UnivSelectBinding binding;
-    static View before_hovered = null;
+    private View before_hovered = null;
     static LinkedList<String> list = new LinkedList<>();
 
     @Override
@@ -78,8 +82,10 @@ public class UnivSelectActivity extends AppCompatActivity {
         univAdapter.setOnItemClickListener(new UnivAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                Intent intent = new Intent(UnivSelectActivity.this, HomeActivity.class);
-                intent.putExtra("univ", list.get(position));
+                Intent intent = new Intent(UnivSelectActivity.this, UserInputActivity.class);
+                User user = new User();
+                user.setUniv(list.get(position));
+                intent.putExtra("user", user);
                 startActivity(intent);
                 finish();
             }

@@ -13,8 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.naca.mealacle.BR;
 import com.naca.mealacle.R;
 import com.naca.mealacle.databinding.ProfileToolbarBinding;
+import com.naca.mealacle.p02.UserInputActivity;
 import com.naca.mealacle.p09.NotifyActivity;
 import com.naca.mealacle.p11.OrderedHistoryActivity;
 import com.naca.mealacle.p12.RiderActivity;
@@ -34,6 +36,8 @@ public class ProfileFragment extends Fragment {
         RecyclerView inform_recycler = binding.include.informRecycler;
         inform_recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         inform_recycler.setHasFixedSize(true);
+
+        binding.include.setVariable(BR.user_profile, UserInputActivity.user);
 
         String[] inform = {"공지사항", "이벤트", "고객센터", "라이더 관리", "환경설정", "약관 및 정책"};
 

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.BR;
 import com.naca.mealacle.R;
+import com.naca.mealacle.data.CartProduct;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.FoodDetailBinding;
 import com.naca.mealacle.p06.BasketActivity;
@@ -135,7 +136,8 @@ public class ProductActivity extends AppCompatActivity {
         binding.toolbar05.content.gotoCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BasketActivity.list.add(food);
+                CartProduct cart = new CartProduct(food, selected_option, count);
+                BasketActivity.list.add(cart);
                 Toast toast = Toast.makeText(ProductActivity.this.getApplicationContext(),
                         "장바구니에 담겼습니다.", Toast.LENGTH_SHORT);
                 toast.show();
@@ -147,9 +149,9 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductActivity.this, OrderActivity.class);
-                LinkedList<Food> list = new LinkedList<>();
-                list.add(food);
-                intent.putExtra("list", list);
+                CartProduct cart = new CartProduct(food, selected_option, count);
+                intent.putExtra("activity", 5);
+                intent.putExtra("cart", cart);
                 startActivity(intent);
             }
         });

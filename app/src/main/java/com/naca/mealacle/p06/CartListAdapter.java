@@ -1,5 +1,6 @@
 package com.naca.mealacle.p06;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.BR;
+import com.naca.mealacle.data.CartProduct;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.CartElementBinding;
 
@@ -24,7 +26,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.BindingViewHolder> {
 
-    private LinkedList<Food> cartList;
+    private LinkedList<CartProduct> cartList;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -32,7 +34,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Bindin
 
     public static OnItemClickListener mListener = null;
 
-    public CartListAdapter(LinkedList<Food> cartList) {
+    public CartListAdapter(LinkedList<CartProduct> cartList) {
         this.cartList = cartList;
     }
 
@@ -72,17 +74,19 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Bindin
                     if(position != RecyclerView.NO_POSITION){
                         cartList.remove(position);
                         notifyItemRemoved(position);
-                        if(CartListAdapter.mListener != null) {
-                            CartListAdapter.mListener.onItemClick(v, position);
-                        }
                     }
                 }
             });
             binding.increase.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void onClick(View v) {
                     int position = getBindingAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
+                        cartList.get(position).setCount(cartList.get(position).getCount() + 1);
+                        binding.count.setText(Integer.toString(cartList.get(position).getCount()));
+                        binding.total.setText(cartList.get(position).getTotal());
+
                         if(CartListAdapter.mListener != null) {
                             CartListAdapter.mListener.onItemClick(v, position);
                         }
@@ -94,6 +98,9 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Bindin
                 public void onClick(View v) {
                     int position = getBindingAdapterPosition();
                     if(position != RecyclerView.NO_POSITION){
+                        cartList.get(position).setCount(cartList.get(position).getCount() - 1);
+                        binding.count.setText(Integer.toString(cartList.get(position).getCount()));
+                        binding.total.setText(cartList.get(position).getTotal());
                         if(CartListAdapter.mListener != null) {
                             CartListAdapter.mListener.onItemClick(v, position);
                         }
@@ -102,15 +109,15 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Bindin
             });
         }
 
-        public void bind(Food food) {
-            binding.setVariable(BR.food_cart, food);
+        public void bind(CartProduct cartProduct) {
+            binding.setVariable(BR.cart, cartProduct);
 
             imageView = binding.foodimage;
             Thread mThread = new Thread() {
                 @Override
                 public void run() {
                     try {
-                        URL url = new URL(food.getImages());
+                        URL url = new URL(cartProduct.getFood().getImages());
 
                         HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
                         connect.setDoInput(true);

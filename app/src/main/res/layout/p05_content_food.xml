@@ -125,7 +125,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{food_detail.dbID}"
+                            android:text="@{food_detail.productID}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 

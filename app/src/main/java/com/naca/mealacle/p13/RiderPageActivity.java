@@ -2,6 +2,9 @@ package com.naca.mealacle.p13;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -13,16 +16,33 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.naca.mealacle.R;
+import com.naca.mealacle.data.Food;
+import com.naca.mealacle.data.Order;
 import com.naca.mealacle.data.Store;
 import com.naca.mealacle.databinding.RiderInfoBinding;
+import com.naca.mealacle.p01.SplashActivity;
 import com.naca.mealacle.p15.DeliveryActivity;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 public class RiderPageActivity extends AppCompatActivity {
 
     private RiderInfoBinding binding;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private List<Object> riderid = new LinkedList<>();
+    private List<String> orderID = new LinkedList<>();
+    private List<Order> orders = new LinkedList<>();
+    private List<Store> stores = new LinkedList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,27 +55,19 @@ public class RiderPageActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        LinkedList<Store> list = new LinkedList<>();
-        list.add(new Store("방콕식장", "대전광역시 유성구 봉명동 566-8 (봉명동)",
-                "월남쌈 쿠킹박스 밀키트", "2000원 (개당)", "오후 9:00", R.drawable.ic_launcher_background));
-
-        list.add(new Store("카페713", "대전광역시 유성구 죽동 713-7 1층",
-                "티라미수 조각 케이크 세트 10개", "2000원 (개당)", "오후 9:00", R.drawable.ic_launcher_background));
-
-        RecyclerView store_recycle = binding.toolbar13.include.storeRecycle;
-        store_recycle.setLayoutManager(new LinearLayoutManager(this));
-        store_recycle.setHasFixedSize(true);
-
-        RiderPageAdapter mAdapter = new RiderPageAdapter(list);
-        mAdapter.setOnItemClickListener(new RiderPageAdapter.OnItemClickListener() {
+        CollectionReference userRef = db.collection("user");
+        userRef.document(SplashActivity.userID).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
-            public void onItemClick(View v, int position) {
-                Intent intent = new Intent(RiderPageActivity.this, DeliveryActivity.class);
-                intent.putExtra("delivery", list.get(position));
-                startActivity(intent);
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                riderid = (List<Object>) documentSnapshot.get("riderID");
             }
         });
-        store_recycle.setAdapter(mAdapter);
+
+        Handler hd = new Handler(Looper.getMainLooper());
+        hd.postDelayed(new RiderHandler(), 100);
+        hd.postDelayed(new OrderHandler(), 400);
+        hd.postDelayed(new StoreHandler(), 1000);
+        hd.postDelayed(new AdaptHandler(), 2000);
     }
 
     @Override
@@ -67,5 +79,158 @@ public class RiderPageActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class RiderHandler implements Runnable{
+
+        @Override
+        public void run() {
+            for(Object s : riderid){
+                db.collection("rider").document(String.valueOf(s)).get()
+                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                List<Object> objects = (List<Object>) documentSnapshot.get("orderid");
+                                for(int i = 0;i<objects.size();i++){
+                                    orderID.add(String.valueOf(objects.get(i)));
+                                }
+                            }
+                        });
+            }
+        }
+    }
+
+    private class OrderHandler implements Runnable{
+
+        @Override
+        public void run() {
+            for(String s : orderID){
+                db.collection("order").document(s)
+                        .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        orders.add(documentSnapshot.toObject(Order.class));
+                    }
+                });
+            }
+        }
+    }
+
+    private class StoreHandler implements Runnable {
+
+        @Override
+        public void run() {
+            for(int i = 0;i<orders.size();i++){
+                Order order = orders.get(i);
+                Store store = new Store();
+                final Food[] food = new Food[1];
+                final boolean[] temp = {true};
+                db.collection("food").document(order.getFoodID()).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    Map<String, Object> data = doc.getData();
+                                    for(int j = 0;j<stores.size();j++){
+                                        if(String.valueOf(data.get("name")).equals(stores.get(j).getName())){
+                                            temp[0] = false;
+                                            Log.d("TEST", "break");
+                                            break;
+                                        }
+                                    }
+                                    Log.d("TEST", Boolean.toString(temp[0]));
+                                    if(temp[0]){
+                                        food[0] = new Food(doc.getId(),
+                                                String.valueOf(data.get("category")),
+                                                String.valueOf(data.get("description")),
+                                                String.valueOf(((List<String>)data.get("image")).get(0)),
+                                                String.valueOf(data.get("name")),
+                                                (List<HashMap<String, Object>>) data.get("options"),
+                                                String.valueOf(data.get("origin")),
+                                                Long.parseLong(String.valueOf(data.get("price"))),
+                                                (HashMap<String, Object>) data.get("seller"));
+                                        store.setProduct(food[0].getName());
+                                        store.setProductID(food[0].getProductID());
+                                        store.setImage(food[0].getImages());
+                                    }
+                                }
+                            }
+                        });
+                if(!temp[0])
+                    continue;
+                db.collection("seller").document(order.getSellerID()).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    DocumentSnapshot doc = task.getResult();
+                                    Map<String, Object> data = doc.getData();
+                                    store.setAddress(String.valueOf(data.get("address")));
+                                    store.setName(String.valueOf(data.get("name")));
+                                    store.setAdderName(String.valueOf(
+                                            ((HashMap<String, Object>)((HashMap<String, Object>) data.get("profile"))
+                                                    .get(Integer.toString(order.getProfile_idx())))
+                                                    .get("profileName")));
+                                }
+                            }
+                        });
+                store.setOrderID(orderID.get(i));
+                store.setCount(store.getCount() + order.getCount());
+                stores.add(store);
+            }
+            Log.e("TEST", "endStoring");
+        }
+    }
+
+    private class AdaptHandler implements Runnable{
+
+        @Override
+        public void run() {
+            LinkedList<Store> list = new LinkedList<>();
+            Boolean isAlready;
+            for(int i = 0;i<stores.size();i++){
+                Store temp1 = stores.get(i);
+                isAlready = false;
+                for(int j = 0;j<list.size();j++){
+                    Store temp2 = list.get(j);
+                    if(temp1.getProductID().equals(temp2.getProductID())){
+                        temp2.getRiderList().add(temp1);
+                        temp2.setCount(temp2.getCount() + temp1.getCount());
+                        isAlready = true;
+                    }
+                }
+                if(!isAlready){
+                    list.add(temp1);
+                }
+            }
+            RecyclerView store_recycle = binding.toolbar13.include.storeRecycle;
+            store_recycle.setLayoutManager(new LinearLayoutManager(RiderPageActivity.this));
+            store_recycle.setHasFixedSize(true);
+
+            RiderPageAdapter mAdapter = new RiderPageAdapter(list);
+            mAdapter.setOnItemClickListener(new RiderPageAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View v, int position) {
+                    Intent intent = new Intent(RiderPageActivity.this, DeliveryActivity.class);
+                    intent.putExtra("delivery", list.get(position));
+                    startActivity(intent);
+                }
+            });
+            store_recycle.setAdapter(mAdapter);
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        orderID = new LinkedList<>();
+        orders = new LinkedList<>();
+        stores = new LinkedList<>();
+        Handler hd = new Handler(Looper.getMainLooper());
+        hd.postDelayed(new RiderHandler(), 100);
+        hd.postDelayed(new OrderHandler(), 400);
+        hd.postDelayed(new StoreHandler(), 1000);
+        hd.postDelayed(new AdaptHandler(), 2000);
+        super.onRestart();
     }
 }

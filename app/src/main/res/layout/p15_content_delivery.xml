@@ -4,10 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data class="DeliveryContentBinding">
+        <variable
+            name="store_delivery"
+            type="com.naca.mealacle.data.Store" />
 
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -21,7 +24,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/delivery_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="wrap_content"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,6 +52,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/clear"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="26dp"
@@ -70,6 +75,7 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/progress"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="12dp"
@@ -107,6 +113,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/image"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:src="@drawable/ic_launcher_background"
@@ -123,21 +130,48 @@
                             android:layout_weight="5"
                             android:layout_marginLeft="10dp"
                             android:gravity="center_vertical"
-                            android:text="방콕식당 충남대점"
+                            android:text="@{store_delivery.name}"
                             android:textStyle="bold"
                             android:textSize="23dp"
                             android:textColor="@color/black"
                             android:ellipsize="end"
                             android:singleLine="true"/>
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="3"
                             android:layout_marginLeft="10dp"
-                            android:text="월남쌈 쿠킹박스 밀키트 5개"
-                            android:textSize="15dp"
-                            android:textColor="@color/black"/>
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@{store_delivery.product}"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text=" "
+                                android:textSize="15dp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="@{Integer.toString(store_delivery.count)}"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="개"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"/>
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -157,7 +191,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:text="월남쌈 쿠킹박스 밀키트 5개"
+                                android:text="@{store_delivery.cost}"
                                 android:textSize="15dp"
                                 android:textColor="@color/black"/>
                         </LinearLayout>
@@ -180,7 +214,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="10dp"
-                                android:text="오후 9:00"
+                                android:text="@{store_delivery.time}"
                                 android:textSize="15dp"
                                 android:textColor="@color/black"/>
                         </LinearLayout>
@@ -190,7 +224,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="6"
                             android:layout_marginLeft="10dp"
-                            android:text="대전광역시123123123 유성구 봉명동 566-8(봉명동)"
+                            android:text="@{store_delivery.address}"
                             android:textSize="15dp"
                             android:textColor="@color/black"
                             android:gravity="bottom"/>
@@ -230,7 +264,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="12dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_delivery.product}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -252,29 +286,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
-                        android:textSize="15dp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="등록시간"
-                        android:textSize="15dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_delivery.productID}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -296,7 +308,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_delivery.adderName}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -318,7 +330,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
-                        android:text="월남쌈 쿠킹박스 밀키트 5개"
+                        android:text="@{store_delivery.contract}"
                         android:textSize="15dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
@@ -335,7 +347,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:text="월남쌈 쿠킹박스 밀키트 5개"
+                    android:text="@{store_delivery.size}"
                     android:textSize="15dp"
                     android:textColor="@color/black"/>
 
@@ -351,21 +363,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="5"
-                    android:text="월남쌈 쿠킹박스 밀키트 5개"
+                    android:text="@{store_delivery.address}"
                     android:textSize="15dp"
                     android:textColor="@color/black"/>
             </LinearLayout>
 
             <ImageView
+                android:id="@+id/mapImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_launcher_background"/>
 
-
-
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
 

@@ -3,37 +3,51 @@ package com.naca.mealacle.data;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class CartProduct extends ViewModel {
+import java.io.Serializable;
+import java.text.DecimalFormat;
+
+public class CartProduct implements Serializable {
     private Food food;
-    private int selectedOption;
-    private MutableLiveData<Integer> count = new MutableLiveData<>();
-    private MutableLiveData<Integer> totalPrice = new MutableLiveData<>();
+    private int count;
+    private int option;
 
     public CartProduct(Food food, int option, int count){
         this.food = food;
-        this.selectedOption = option;
-        this.count.setValue(count);
+        this.option = option;
+        this.count = count;
     }
 
-    public MutableLiveData<Integer> getCount() {
-        if (count == null){
-            count = new MutableLiveData<>();
-        }
+    public Food getFood() {
+        return food;
+    }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count){
-        this.count.setValue(count);
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public MutableLiveData<Integer> getTotalPrice() {
-        if (totalPrice == null){
-            totalPrice = new MutableLiveData<>();
-        }
-        return totalPrice;
+    public int getOption() {
+        return option;
     }
 
-    public void setTotalPrice(Integer price) {
-        this.totalPrice.setValue(price);
+    public void setOption(int option) {
+        this.option = option;
+    }
+
+    public String getTotal(){
+        DecimalFormat format = new DecimalFormat("###,###");
+        long price = (food.getPrice() + Integer.parseInt(String.valueOf(food.getOptions().get(getOption()).get("price"))) ) * count;
+        return format.format(price) + "원";
+    }
+
+    public long getTotalLong(){
+        return (food.getPrice() + Integer.parseInt(String.valueOf(food.getOptions().get(getOption()).get("price"))) ) * count;
     }
 }

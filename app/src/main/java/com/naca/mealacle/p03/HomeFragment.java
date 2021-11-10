@@ -30,6 +30,7 @@ import com.naca.mealacle.data.Category;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.HomeToolbarBinding;
 import com.naca.mealacle.p02.UnivSelectActivity;
+import com.naca.mealacle.p02.UserInputActivity;
 import com.naca.mealacle.p04.CategoryActivity;
 import com.naca.mealacle.p05.ProductActivity;
 import com.naca.mealacle.p09.NotifyActivity;
@@ -39,7 +40,7 @@ import java.util.LinkedList;
 public class HomeFragment extends Fragment {
 
     private HomeToolbarBinding binding;
-    static String univ;
+    private String univ;
 
     @Nullable
     @Override
@@ -47,7 +48,7 @@ public class HomeFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.p03_app_toolbar_home, container, false);
 
-        univ = getArguments().getString("univ");
+        univ = UserInputActivity.user.getUniv();
 
         Toolbar toolbar = binding.toolbar03;
 

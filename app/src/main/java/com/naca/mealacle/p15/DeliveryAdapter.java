@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.naca.mealacle.BR;
 import com.naca.mealacle.data.Delivery;
 import com.naca.mealacle.data.Store;
@@ -18,6 +19,7 @@ import java.util.LinkedList;
 public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.BindingViewHolder> {
 
     private LinkedList<Delivery> deliveryList;
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -38,6 +40,14 @@ public class DeliveryAdapter extends RecyclerView.Adapter<DeliveryAdapter.Bindin
 
     @Override
     public void onBindViewHolder(@NonNull BindingViewHolder holder, int position) {
+        if(deliveryList.get(position).getOrder().isComplete()){
+            holder.binding.deliverComplete.setEnabled(false);
+            holder.binding.deliverComplete.setText("완료");
+            db.collection("order").document(deliveryList.get(position).getOrderID())
+                    .update("complete", true);
+        }
+
+
         holder.bind(deliveryList.get(position));
     }
 

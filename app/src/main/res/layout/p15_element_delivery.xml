@@ -25,18 +25,50 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{delivery.address}"
+                android:text="@{delivery.user.address}"
                 android:textSize="17dp"
                 android:textColor="@color/black"
                 android:textStyle="bold"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{delivery.product}"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                android:paddingVertical="10dp"/>
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@{delivery.productName}"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:paddingVertical="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text=" "
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:paddingVertical="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@{Integer.toString(delivery.order.count)}"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:paddingVertical="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="개"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:paddingVertical="10dp"/>
+
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/deliver_complete"

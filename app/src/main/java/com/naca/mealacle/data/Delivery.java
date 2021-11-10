@@ -1,27 +1,47 @@
 package com.naca.mealacle.data;
 
 public class Delivery {
-    private String address;
-    private String product;
+    Order order;
+    User user;
+    String orderID;
+    String productName;
 
-    public Delivery(String address, String product){
-        this.address = address;
-        this.product = product;
+    public Delivery(Order order, User user, String orderID, String productName) {
+        this.order = order;
+        this.user = user;
+        this.orderID = orderID;
+        this.productName = productName;
     }
 
-    public String getAddress() {
-        return address;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public String getProduct() {
-        return product;
+    public User getUser() {
+        return user;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 }

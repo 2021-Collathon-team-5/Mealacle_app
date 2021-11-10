@@ -30,6 +30,8 @@ import com.naca.mealacle.databinding.CategoryBinding;
 import com.naca.mealacle.p05.ProductActivity;
 import com.naca.mealacle.p06.BasketActivity;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private LinkedList<Food> list = new LinkedList<>();
     private int selected_option = 0;
+    private int pos;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class CategoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        int pos = bundle.getInt("position");
+        pos = bundle.getInt("position");
         String univ = bundle.getString("univ");
 
         Toolbar toolbar = binding.toolbar04.toolbar04;
@@ -70,7 +73,7 @@ public class CategoryActivity extends AppCompatActivity {
                     public void run() {
                         Objects.requireNonNull(tabs.getTabAt(pos)).select();
                         if (pos == 0){
-                            updateData();
+                            updateData(selected_option);
                         }
                     }
                 }, 100);
@@ -79,7 +82,8 @@ public class CategoryActivity extends AppCompatActivity {
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                updateData();
+                pos = tab.getPosition();
+                updateData(selected_option);
             }
 
             @Override
@@ -107,6 +111,7 @@ public class CategoryActivity extends AppCompatActivity {
                 sortAdapter.setSelected_position(position);
                 sortAdapter.notifyDataSetChanged();
                 selected_option = position;
+                updateData(selected_option);
             }
         });
         sort_recycler.setAdapter(sortAdapter);
@@ -134,9 +139,9 @@ public class CategoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void updateData(){
+    public void updateData(int position){
         CollectionReference docFood = db.collection("food");
-        docFood.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        docFood.whereEqualTo("category", Integer.toString(pos)).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -144,16 +149,57 @@ public class CategoryActivity extends AppCompatActivity {
                     for(QueryDocumentSnapshot document : task.getResult()){
                         Map<String, Object> data = document.getData();
                         list.add(new Food(document.getId(),
-                                String.valueOf(data.get("name")),
-                                Long.parseLong(String.valueOf(data.get("price"))),
-                                String.valueOf(((List<String>)data.get("image")).get(0)),
+                                String.valueOf(data.get("category")),
                                 String.valueOf(data.get("description")),
+                                String.valueOf(((List<String>)data.get("image")).get(0)),
+                                String.valueOf(data.get("name")),
                                 (List<HashMap<String, Object>>) data.get("options"),
-                                String.valueOf(data.get("origin"))));
+                                String.valueOf(data.get("origin")),
+                                Long.parseLong(String.valueOf(data.get("price"))),
+                                (HashMap<String, Object>) data.get("seller")));
                     }
+
                 } else {
                     Log.d("FAIL", "ERROR", task.getException());
                 }
+
+                Comparator comparator = null;
+                switch (position){
+                    case 1:
+                        comparator = new Comparator<Food>() {
+                            @Override
+                            public int compare(Food o1, Food o2) {
+                                if(o1.getRating() < o2.getRating()) return 1;
+                                if(o1.getRating() > o2.getRating()) return -1;
+                                return 0;
+                            }
+                        };
+                        Collections.sort(list, comparator);
+                        break;
+                    case 2:
+                        comparator = new Comparator<Food>() {
+                            @Override
+                            public int compare(Food o1, Food o2) {
+                                if(o1.getPrice() < o2.getPrice()) return 1;
+                                if(o1.getPrice() > o2.getPrice()) return -1;
+                                return 0;
+                            }
+                        };
+                        Collections.sort(list, comparator);
+                        break;
+                    case 3:
+                        comparator = new Comparator<Food>() {
+                            @Override
+                            public int compare(Food o1, Food o2) {
+                                if(o1.getPrice() > o2.getPrice()) return 1;
+                                if(o1.getPrice() < o2.getPrice()) return -1;
+                                return 0;
+                            }
+                        };
+                        Collections.sort(list, comparator);
+                        break;
+                }
+
 
                 RecyclerView food_recycler = binding.toolbar04.content.foodlist;
                 food_recycler.setLayoutManager(new LinearLayoutManager(CategoryActivity.this));

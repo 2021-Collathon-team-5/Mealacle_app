@@ -17,36 +17,43 @@ import java.util.List;
 public class Food implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String dbID = "";
+    private String category;
+    private String description;
+    private String images;
     private String name = "0"; // 상품 이름
+    private List<HashMap<String, Object>> options;
+    private String origin = "0"; // 원산지
     private long price = 0; // 상품 가격
+    private HashMap<String, Object> seller;
+    private double rating = Math.random() * 5;
+
+    private String dbID = "";
     private String price_string;
     private String productID = "0"; // 상품 번호
     private String manufacture = "0"; // 제조사
-    private String origin = "0"; // 원산지
-    private List<HashMap<String, Object>> options;
 
     private int imageID = R.drawable.ic_launcher_background; // 상품 이미지id << 방식 변경 예정
     private int detailImageID = R.drawable.ic_launcher_background; // 상품 설명 이미지 id << 방식 변경 예정
 
-    private String images;
-    private String description;
 
     public Food() {
 
     }
 
-    public Food(String dbID, String name, long price, String images,
-                String description, List<HashMap<String, Object>> options, String origin){
+    public Food(String dbID, String category, String description, String images, String name,
+                List<HashMap<String, Object>> options, String origin, long price, HashMap<String, Object> seller) {
         setDbID(dbID);
-        setName(name);
-        setPrice(price);
-        setImageID(imageID);
-        setDetailImageID(imageID);
-        setImages(images);
-        setDescription(description);
-        setOptions(options);
-        setOrigin(origin);
+        this.category = category;
+        this.description = description;
+        this.images = images;
+        this.name = name;
+        this.options = options;
+        this.origin = origin;
+        this.price = price;
+        this.seller = seller;
+
+        setPrice_string(this.price);
+        setDbID(this.dbID);
     }
 
     public Food(String name, int price, int imageID){
@@ -66,7 +73,8 @@ public class Food implements Serializable {
         for(int i = 0;i<5;i++){
             sb.append((int) idarr[i]);
         }
-        this.dbID = sb.toString().substring(0, 10);
+        setProductID(sb.toString().substring(0, 10));
+        this.dbID = dbID;
     }
 
     public String getName() {
@@ -82,7 +90,6 @@ public class Food implements Serializable {
     }
 
     public void setPrice(long price) {
-        setPrice_string(price);
         this.price = price;
     }
 
@@ -157,5 +164,39 @@ public class Food implements Serializable {
 
     public void setOptions(List<HashMap<String, Object>> options) {
         this.options = options;
+    }
+
+    public HashMap<String, Object> getSeller() {
+        return seller;
+    }
+
+    public void setSeller(HashMap<String, Object> seller) {
+        this.seller = seller;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getRatingString(){
+        return Double.toString(rating);
+    }
+
+    public String getOptionPrice(int option){
+        DecimalFormat format = new DecimalFormat("###,###");
+
+        return format.format(Integer.parseInt(String.valueOf(options.get(option).get("price")))) + "원";
     }
 }

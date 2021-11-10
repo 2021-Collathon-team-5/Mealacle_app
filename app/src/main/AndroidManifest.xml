@@ -27,6 +27,9 @@
         <activity android:name=".p02.UnivSelectActivity">
         </activity>
 
+        <activity android:name=".p02.UserInputActivity">
+        </activity>
+
         <activity android:name=".p03.HomeActivity">
         </activity>
 

@@ -1,8 +1,11 @@
 package com.naca.mealacle.p11;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,7 +14,13 @@ import com.naca.mealacle.BR;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.OrderedElementBinding;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedList;
+
+import javax.net.ssl.HttpsURLConnection;
 
 public class OrderedAdapter extends RecyclerView.Adapter<OrderedAdapter.BindingViewHolder> {
 
@@ -51,6 +60,8 @@ public class OrderedAdapter extends RecyclerView.Adapter<OrderedAdapter.BindingV
 
     public class BindingViewHolder extends RecyclerView.ViewHolder {
         OrderedElementBinding binding;
+        Bitmap bitmap;
+        ImageView imageView;
 
         public BindingViewHolder(@NonNull OrderedElementBinding binding) {
             super(binding.getRoot());
@@ -70,6 +81,35 @@ public class OrderedAdapter extends RecyclerView.Adapter<OrderedAdapter.BindingV
 
         public void bind(Food food) {
             binding.setVariable(BR.food_ordered, food);
+            imageView = binding.foodImage;
+            Thread mThread = new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        URL url = new URL(food.getImages());
+
+                        HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
+                        connect.setDoInput(true);
+                        connect.connect();
+
+                        InputStream is = connect.getInputStream();
+                        bitmap = BitmapFactory.decodeStream(is);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+
+            mThread.start();
+
+            try {
+                mThread.join();
+                imageView.setImageBitmap(bitmap);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

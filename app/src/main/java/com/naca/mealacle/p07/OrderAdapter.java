@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.BR;
+import com.naca.mealacle.data.CartProduct;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.CartElementBinding;
 import com.naca.mealacle.databinding.ReceiptElementBinding;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BindingViewHolder> {
 
-    private List<Food> cartList;
+    private List<CartProduct> cartList;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -26,7 +27,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BindingViewH
 
     public static OnItemClickListener mListener = null;
 
-    public OrderAdapter(List<Food> cartList) {
+    public OrderAdapter(List<CartProduct> cartList) {
         this.cartList = cartList;
     }
 
@@ -70,8 +71,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.BindingViewH
             });
         }
 
-        public void bind(Food food) {
-            binding.setVariable(BR.food_receipt, food);
+        public void bind(CartProduct cart) {
+            binding.setVariable(BR.receipt, cart);
         }
     }
 }

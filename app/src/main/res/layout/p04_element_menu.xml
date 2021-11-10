@@ -70,7 +70,7 @@
                         android:progressTint="@color/hover"
                         android:secondaryProgressTint="@color/hover"
                         android:layout_gravity="center_vertical"
-                        android:rating="3.8"
+                        android:rating="@{(float)food_menu.rating}"
                         style="?android:attr/ratingBarStyleSmall"/>
 
                     <TextView

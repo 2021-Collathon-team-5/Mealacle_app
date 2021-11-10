@@ -7,30 +7,31 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.BindingAdapter;
 
 import java.io.Serializable;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Store implements Serializable {
     private String name; // 가게 이름
     private String address; // 가게 주소
     private String product; // 배달해야하는 상품 명
-    private String cost; // 배달 단가
-    private String time; // 배달 시간
+    private String cost = "2000원 (개당)"; // 배달 단가
+    private String time = "오후 9:00"; // 배달 시간
     private String productID = "0"; // 상품번호
     private String addTime = "0"; // 등록 시간
     private String adderName = "0"; // 업체 사장 이름
-    private String contract = "0"; // 업체 사장 번호
-    private String size = "가로 0cm / 세로 0cm / 높이 0cm"; // 상품 크기
+    private String contract = "01000000000"; // 업체 사장 번호
+    private String size = "가로 30cm / 세로 20cm / 높이 5cm"; // 상품 크기
+    private Food food;
+    private int count = 0;
+    private String orderID;
 
-    int imageID; // 상품 이미지 id << 방식 변경 예정
-    int mapImageID; // 매장 주소 이미지 id << 방식 변경 예정
+    private List<Store> riderList = new LinkedList<>();
 
-    public Store(String name, String address, String product, String cost, String time, int imageID){
-        this.name = name;
-        this.address = address;
-        this.product = product;
-        this.cost = cost;
-        this.time = time;
-        this.imageID = imageID;
-        this.mapImageID = imageID;
+    private String image;
+    private String mapImage;
+
+    public Store(){
+
     }
 
     public String getName() {
@@ -113,19 +114,51 @@ public class Store implements Serializable {
         this.size = size;
     }
 
-    public int getImageID() {
-        return imageID;
+    public Food getFood() {
+        return food;
     }
 
-    public void setImageID(int imageID) {
-        this.imageID = imageID;
+    public void setFood(Food food) {
+        this.food = food;
     }
 
-    public int getMapImageID() {
-        return mapImageID;
+    public String getImage() {
+        return image;
     }
 
-    public void setMapImageID(int mapImageID) {
-        this.mapImageID = mapImageID;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getMapImage() {
+        return mapImage;
+    }
+
+    public void setMapImage(String mapImage) {
+        this.mapImage = mapImage;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public List<Store> getRiderList() {
+        return riderList;
+    }
+
+    public void setRiderList(List<Store> riderList) {
+        this.riderList = riderList;
+    }
+
+    public String getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(String orderID) {
+        this.orderID = orderID;
     }
 }

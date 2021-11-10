@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.naca.mealacle.R;
+import com.naca.mealacle.data.CartProduct;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.CartBinding;
 import com.naca.mealacle.p05.ProductActivity;
@@ -30,7 +31,7 @@ import java.util.List;
 public class BasketActivity extends AppCompatActivity {
 
     private CartBinding binding;
-    public static LinkedList<Food> list = new LinkedList<>();
+    public static LinkedList<CartProduct> list = new LinkedList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,19 +48,6 @@ public class BasketActivity extends AppCompatActivity {
         cart_recyclr.setHasFixedSize(true);
 
         CartListAdapter mAdapter = new CartListAdapter(list);
-        mAdapter.setOnItemClickListener(new CartListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View v, int position) {
-                switch (v.getId()){
-                    case R.id.increase:
-                        Log.d("INCREASE", "increase");
-                        break;
-                    case R.id.decrease:
-                        Log.d("DECREASE", "decrease");
-                        break;
-                }
-            }
-        });
         cart_recyclr.setItemAnimator(new DefaultItemAnimator());
 
         cart_recyclr.setAdapter(mAdapter);
@@ -74,6 +62,7 @@ public class BasketActivity extends AppCompatActivity {
                     toast.show();
                 } else {
                     Intent intent = new Intent(BasketActivity.this, OrderActivity.class);
+                    intent.putExtra("activity", 6);
                     startActivity(intent);
                 }
             }
@@ -91,4 +80,5 @@ public class BasketActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
