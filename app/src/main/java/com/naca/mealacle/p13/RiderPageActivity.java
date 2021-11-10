@@ -64,9 +64,9 @@ public class RiderPageActivity extends AppCompatActivity {
         });
 
         Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new RiderHandler(), 300);
-        hd.postDelayed(new OrderHandler(), 800);
-        hd.postDelayed(new StoreHandler(), 1400);
+        hd.postDelayed(new RiderHandler(), 500);
+        hd.postDelayed(new OrderHandler(), 1000);
+        hd.postDelayed(new StoreHandler(), 1500);
         hd.postDelayed(new AdaptHandler(), 2000);
     }
 
@@ -227,9 +227,9 @@ public class RiderPageActivity extends AppCompatActivity {
         orders = new LinkedList<>();
         stores = new LinkedList<>();
         Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new RiderHandler(), 100);
-        hd.postDelayed(new OrderHandler(), 400);
-        hd.postDelayed(new StoreHandler(), 1000);
+        hd.postDelayed(new RiderHandler(), 500);
+        hd.postDelayed(new OrderHandler(), 1000);
+        hd.postDelayed(new StoreHandler(), 1500);
         hd.postDelayed(new AdaptHandler(), 2000);
         super.onRestart();
     }

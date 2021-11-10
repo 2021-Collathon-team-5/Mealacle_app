@@ -72,9 +72,9 @@ public class OrderedHistoryActivity extends AppCompatActivity {
             }
         });
         Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new Handler_1(), 300);
-        hd.postDelayed(new Handler_2(), 600);
-        hd.postDelayed(new HistoryHandler(), 1000);
+        hd.postDelayed(new Handler_1(), 500);
+        hd.postDelayed(new Handler_2(), 1000);
+        hd.postDelayed(new HistoryHandler(), 1500);
     }
 
     @Override

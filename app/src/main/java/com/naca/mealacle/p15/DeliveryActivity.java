@@ -87,7 +87,7 @@ public class DeliveryActivity extends AppCompatActivity {
         }
 
         Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new UserHandler(), 200);
+        hd.postDelayed(new UserHandler(), 500);
         hd.postDelayed(new AdaptHandler(), 1000);
         bind(store);
     }

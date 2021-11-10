@@ -77,9 +77,9 @@ public class RiderActivity extends AppCompatActivity {
         binding.toolbar12.include.progress.setText("진행중인 배달 : " + UserInputActivity.user.getRiderID().size() + "개");
 
         Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new FoodHandler(), 200);
+        hd.postDelayed(new FoodHandler(), 500);
         hd.postDelayed(new RiderHandler(), 1000);
-        hd.postDelayed(new AdaptHandler(), 2000);
+        hd.postDelayed(new AdaptHandler(), 1500);
     }
 
     @Override
@@ -250,8 +250,8 @@ public class RiderActivity extends AppCompatActivity {
         binding.toolbar12.include.progress.setText("진행중인 배달 : " + UserInputActivity.user.getRiderID().size() + "개");
 
         Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new FoodHandler(), 200);
-        hd.postDelayed(new RiderHandler(), 700);
+        hd.postDelayed(new FoodHandler(), 500);
+        hd.postDelayed(new RiderHandler(), 1000);
         hd.postDelayed(new AdaptHandler(), 2000);
         super.onRestart();
     }
