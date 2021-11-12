@@ -74,9 +74,22 @@
                         style="?android:attr/ratingBarStyleSmall"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:text="(13+)"
+                        android:text="("
+                        android:gravity="center"
+                        android:layout_marginLeft="5dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@{Integer.toString(food_menu.mention)}"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text=")"
                         android:gravity="center"/>
 
                 </LinearLayout>
