@@ -46,10 +46,11 @@
                             android:gravity="center_vertical"/>
 
                         <TextView
+                            android:id="@+id/complete"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="117번"
+                            android:text="0개"
                             android:textSize="18dp"
                             android:textColor="@color/black"
                             android:gravity="center_vertical"/>
@@ -70,10 +71,11 @@
                             android:gravity="center_vertical"/>
 
                         <TextView
+                            android:id="@+id/now"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="2개"
+                            android:text="0개"
                             android:textSize="18dp"
                             android:textColor="@color/black"
                             android:gravity="center_vertical"/>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +20,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.naca.mealacle.BR;
 import com.naca.mealacle.R;
 import com.naca.mealacle.data.CartProduct;
 import com.naca.mealacle.data.Food;
 import com.naca.mealacle.databinding.FoodDetailBinding;
 import com.naca.mealacle.p06.BasketActivity;
+import com.naca.mealacle.p06.CartListAdapter;
 import com.naca.mealacle.p07.OrderActivity;
 
 import java.io.IOException;
@@ -42,10 +45,8 @@ public class ProductActivity extends AppCompatActivity {
     private FoodDetailBinding binding;
     private boolean isOrder = false;
     private ImageView foodImage;
-    private Bitmap foodBitmap;
 
     private ImageView detailImage;
-    private Bitmap detailBitmap;
 
     private int selected_option = 0;
     private int count = 1;
@@ -195,51 +196,62 @@ public class ProductActivity extends AppCompatActivity {
         binding.toolbar05.content.setVariable(BR.food_detail, food);
 
         foodImage = binding.toolbar05.content.foodimage;
-
-
         detailImage = binding.toolbar05.content.detailImage;
 
-        Thread mThread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL foodUrl = new URL(food.getImages());
+        ReviewLoadTask task = new ReviewLoadTask(food.getImages(), 0);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-                    HttpsURLConnection connect = (HttpsURLConnection) foodUrl.openConnection();
-                    connect.setDoInput(true);
-                    connect.connect();
+        task = new ReviewLoadTask(food.getDescription(), 1);
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+    }
 
-                    InputStream is = connect.getInputStream();
-                    foodBitmap = BitmapFactory.decodeStream(is);
+    private class ReviewLoadTask extends AsyncTask<Void, Void, Bitmap> {
+        private String urlStr;
+        private int pos;
 
-                    is.close();
-
-                    URL detailUrl = new URL(food.getDescription());
-
-                    connect = (HttpsURLConnection) detailUrl.openConnection();
-                    connect.setDoInput(true);
-                    connect.connect();
-
-                    is = connect.getInputStream();
-                    detailBitmap = BitmapFactory.decodeStream(is);
-                    is.close();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        mThread.start();
-
-        try {
-            mThread.join();
-            foodImage.setImageBitmap(foodBitmap);
-            detailImage.setImageBitmap(detailBitmap);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        public ReviewLoadTask(String url, int pos){
+            this.urlStr = url;
+            this.pos = pos;
         }
 
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            Bitmap bitmap = null;
+            try{
+                URL url = new URL(urlStr);
+                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            }catch (Exception e){}
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @SuppressLint("UseCompatLoadingForDrawables")
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            try{
+                if(bitmap != null) {
+                    if(pos == 0){
+                        Glide.with(ProductActivity.this).load(bitmap).into(foodImage);
+                    } else {
+                        Glide.with(ProductActivity.this).load(bitmap).into(detailImage);
+                    }
+                }
+                else {
+                    if (pos == 0){
+                        Glide.with(ProductActivity.this).load(binding.toolbar05.content.getRoot().getResources().getDrawable(R.drawable.ic_launcher_background)).into(foodImage);
+                    } else {
+                        Glide.with(ProductActivity.this).load(binding.toolbar05.content.getRoot().getResources().getDrawable(R.drawable.ic_launcher_background)).into(detailImage);
+                    }
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

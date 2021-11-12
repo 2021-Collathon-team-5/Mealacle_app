@@ -1,8 +1,10 @@
 package com.naca.mealacle.p14;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -21,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.databinding.DataBindingUtil;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -34,6 +37,7 @@ import com.naca.mealacle.data.User;
 import com.naca.mealacle.databinding.EmployBinding;
 import com.naca.mealacle.p01.SplashActivity;
 import com.naca.mealacle.p02.UserInputActivity;
+import com.naca.mealacle.p13.RiderPageAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -52,7 +56,6 @@ public class EmploymentActivity extends AppCompatActivity {
     private EmploymentDialog dialog;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private Bitmap bitmap;
     private ImageView imageView;
     private Store store;
     @Override
@@ -152,34 +155,9 @@ public class EmploymentActivity extends AppCompatActivity {
         binding.toolbar14.setVariable(BR.store, store.getName());
         binding.toolbar14.include.setVariable(BR.store_detail, store);
         imageView = binding.toolbar14.include.image;
-        Thread mThread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(store.getImage());
 
-                    HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
-                    connect.setDoInput(true);
-                    connect.connect();
-
-                    InputStream is = connect.getInputStream();
-                    bitmap = BitmapFactory.decodeStream(is);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        mThread.start();
-
-        try {
-            mThread.join();
-            imageView.setImageBitmap(bitmap);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ReviewLoadTask task = new ReviewLoadTask(store.getImage());
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -191,5 +169,45 @@ public class EmploymentActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class ReviewLoadTask extends AsyncTask<Void, Void, Bitmap> {
+        private String urlStr;
+
+        public ReviewLoadTask(String url){
+            this.urlStr = url;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            Bitmap bitmap = null;
+            try{
+                URL url = new URL(urlStr);
+                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            }catch (Exception e){}
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @SuppressLint("UseCompatLoadingForDrawables")
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            try {
+                if(bitmap != null) {
+                    Glide.with(EmploymentActivity.this).load(bitmap).into(imageView);
+                }
+                else {
+                    Glide.with(EmploymentActivity.this).load(binding.getRoot().getResources().getDrawable(R.drawable.ic_launcher_background)).into(imageView);
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 }

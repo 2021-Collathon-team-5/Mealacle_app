@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -20,6 +21,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +33,7 @@ import com.naca.mealacle.data.Order;
 import com.naca.mealacle.data.Store;
 import com.naca.mealacle.data.User;
 import com.naca.mealacle.databinding.DeliveryBinding;
+import com.naca.mealacle.p14.EmploymentActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,6 +58,9 @@ public class DeliveryActivity extends AppCompatActivity {
 
     private ImageView mapImage;
     private Bitmap detailBitmap;
+
+    private int clear = 0;
+    private int progress = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,37 +103,8 @@ public class DeliveryActivity extends AppCompatActivity {
 
         foodImage = binding.toolbar15.include.image;
 
-        Thread mThread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    URL foodUrl = new URL(store.getImage());
-
-                    HttpsURLConnection connect = (HttpsURLConnection) foodUrl.openConnection();
-                    connect.setDoInput(true);
-                    connect.connect();
-
-                    InputStream is = connect.getInputStream();
-                    foodBitmap = BitmapFactory.decodeStream(is);
-
-                    is.close();
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        mThread.start();
-
-        try {
-            mThread.join();
-            foodImage.setImageBitmap(foodBitmap);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        ReviewLoadTask task = new ReviewLoadTask(store.getImage());
+        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -156,6 +133,46 @@ public class DeliveryActivity extends AppCompatActivity {
         }
     }
 
+    private class ReviewLoadTask extends AsyncTask<Void, Void, Bitmap> {
+        private String urlStr;
+
+        public ReviewLoadTask(String url){
+            this.urlStr = url;
+        }
+
+        @Override
+        protected Bitmap doInBackground(Void... voids) {
+            Bitmap bitmap = null;
+            try{
+                URL url = new URL(urlStr);
+                bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            }catch (Exception e){}
+
+            return bitmap;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @SuppressLint("UseCompatLoadingForDrawables")
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+            try {
+                if(bitmap != null) {
+                    Glide.with(DeliveryActivity.this).load(bitmap).into(foodImage);
+                }
+                else {
+                    Glide.with(DeliveryActivity.this).load(binding.getRoot().getResources().getDrawable(R.drawable.ic_launcher_background)).into(foodImage);
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
+
     private class AdaptHandler implements Runnable{
         @SuppressLint("SetTextI18n")
         @Override
@@ -165,8 +182,8 @@ public class DeliveryActivity extends AppCompatActivity {
                 list.add(new Delivery(orders.get(i), users.get(i), orderID.get(i), store.getProduct()));
             }
 
-            int clear = 0;
-            int progress = 0;
+            clear = 0;
+            progress = 0;
             for(Delivery d : list){
                 if(d.getOrder().isComplete()){
                     clear++;
@@ -194,15 +211,9 @@ public class DeliveryActivity extends AppCompatActivity {
                             textView.setText("완료");
                             db.collection("order").document(list.get(position).getOrderID())
                                     .update("complete", true);
-                            int clear = 0;
-                            int progress = 0;
-                            for(Delivery d : list){
-                                if(d.getOrder().isComplete()){
-                                    clear++;
-                                } else {
-                                    progress--;
-                                }
-                            }
+
+                            clear++;
+                            progress--;
 
                             binding.toolbar15.include.clear.setText(Integer.toString(clear) + "개");
                             binding.toolbar15.include.progress.setText(Integer.toString(progress) + "개");

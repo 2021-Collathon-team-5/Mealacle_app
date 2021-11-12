@@ -1,7 +1,9 @@
 package com.naca.mealacle.p13;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +12,14 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.naca.mealacle.BR;
+import com.naca.mealacle.R;
 import com.naca.mealacle.data.Store;
 import com.naca.mealacle.databinding.RiderElementBinding;
 import com.naca.mealacle.databinding.RiderInfoBinding;
 import com.naca.mealacle.databinding.RiderInfoElementBinding;
+import com.naca.mealacle.p12.RiderAdapter;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,6 +32,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class RiderPageAdapter extends RecyclerView.Adapter<RiderPageAdapter.BindingViewHolder> {
 
     private LinkedList<Store> storeList;
+    private Context context;
 
     public interface OnItemClickListener {
         void onItemClick(View v, int position);
@@ -34,8 +40,9 @@ public class RiderPageAdapter extends RecyclerView.Adapter<RiderPageAdapter.Bind
 
     public static OnItemClickListener mListener = null;
 
-    public RiderPageAdapter(LinkedList<Store> cartList) {
+    public RiderPageAdapter(LinkedList<Store> cartList, Context context) {
         this.storeList = cartList;
+        this.context = context;
     }
 
     @NonNull
@@ -83,33 +90,46 @@ public class RiderPageAdapter extends RecyclerView.Adapter<RiderPageAdapter.Bind
         public void bind(Store store) {
             binding.setVariable(BR.store_info, store);
             imageView = binding.image;
-            Thread mThread = new Thread() {
-                @Override
-                public void run() {
-                    try {
-                        URL url = new URL(store.getImage());
+            ReviewLoadTask task = new ReviewLoadTask(store.getImage());
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
 
-                        HttpsURLConnection connect = (HttpsURLConnection) url.openConnection();
-                        connect.setDoInput(true);
-                        connect.connect();
+        private class ReviewLoadTask extends AsyncTask<Void, Void, Bitmap> {
+            private String urlStr;
 
-                        InputStream is = connect.getInputStream();
-                        bitmap = BitmapFactory.decodeStream(is);
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            public ReviewLoadTask(String url){
+                this.urlStr = url;
+            }
+
+            @Override
+            protected Bitmap doInBackground(Void... voids) {
+                Bitmap bitmap = null;
+                try{
+                    URL url = new URL(urlStr);
+                    bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                }catch (Exception e){}
+
+                return bitmap;
+            }
+
+            @Override
+            protected void onProgressUpdate(Void... values) {
+                super.onProgressUpdate(values);
+            }
+
+            @Override
+            protected void onPostExecute(Bitmap bitmap) {
+                super.onPostExecute(bitmap);
+                try{
+                    if(bitmap != null) {
+                        Glide.with(context).load(bitmap).into(imageView);
                     }
+                    else {
+                        Glide.with(context).load(itemView.getResources().getDrawable(R.drawable.ic_launcher_background)).into(imageView);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
-            };
-
-            mThread.start();
-
-            try {
-                mThread.join();
-                imageView.setImageBitmap(bitmap);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
     }

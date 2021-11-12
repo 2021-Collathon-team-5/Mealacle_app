@@ -47,7 +47,7 @@ public class BasketActivity extends AppCompatActivity {
         cart_recyclr.setLayoutManager(new LinearLayoutManager(this));
         cart_recyclr.setHasFixedSize(true);
 
-        CartListAdapter mAdapter = new CartListAdapter(list);
+        CartListAdapter mAdapter = new CartListAdapter(list ,BasketActivity.this);
         cart_recyclr.setItemAnimator(new DefaultItemAnimator());
 
         cart_recyclr.setAdapter(mAdapter);

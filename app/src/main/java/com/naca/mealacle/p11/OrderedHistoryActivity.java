@@ -59,7 +59,21 @@ public class OrderedHistoryActivity extends AppCompatActivity {
         list = new LinkedList<>();
         foodIdList = new LinkedList<>();
 
-        StringBuilder sb = new StringBuilder();
+
+        ordered_recycler = binding.toolbar11.include.orderedRecycler;
+        ordered_recycler.setLayoutManager(new LinearLayoutManager(OrderedHistoryActivity.this));
+        ordered_recycler.setHasFixedSize(true);
+
+        mAdapter = new OrderedAdapter(list, OrderedHistoryActivity.this);
+        mAdapter.setOnItemClickListener(new OrderedAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                Intent intent = new Intent(OrderedHistoryActivity.this, ProductActivity.class);
+                intent.putExtra("select", list.get(position));
+                startActivity(intent);
+            }
+        });
+        ordered_recycler.setAdapter(mAdapter);
 
         DocumentReference docRef = db.collection("user").document(SplashActivity.userID);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -69,12 +83,45 @@ public class OrderedHistoryActivity extends AppCompatActivity {
                     DocumentSnapshot doc = task.getResult();
                     idList = (List<String>) doc.getData().get("orderList");
                 }
+
+                CollectionReference colRef = db.collection("order");
+                for(int i = 0;i<idList.size();i++){
+                    Log.d("ID", idList.get(i));
+                    colRef.document(idList.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()){
+                                DocumentSnapshot doc = task.getResult();
+                                Map<String, Object> data = doc.getData();
+                                foodIdList.add(String.valueOf(data.get("foodID")));
+                                String foodId = String.valueOf(data.get("foodID"));
+                                db.collection("food")
+                                        .document(foodId)
+                                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if (task.isSuccessful()){
+                                            DocumentSnapshot doc = task.getResult();
+                                            Map<String, Object> data = doc.getData();
+                                            list.add(new Food(doc.getId(),
+                                                    String.valueOf(data.get("category")),
+                                                    String.valueOf(data.get("description")),
+                                                    String.valueOf(((List<String>)data.get("image")).get(0)),
+                                                    String.valueOf(data.get("name")),
+                                                    (List<HashMap<String, Object>>) data.get("options"),
+                                                    String.valueOf(data.get("origin")),
+                                                    Long.parseLong(String.valueOf(data.get("price"))),
+                                                    (HashMap<String, Object>) data.get("seller")));
+                                        }
+                                        mAdapter.notifyDataSetChanged();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }
             }
         });
-        Handler hd = new Handler(Looper.getMainLooper());
-        hd.postDelayed(new Handler_1(), 500);
-        hd.postDelayed(new Handler_2(), 1000);
-        hd.postDelayed(new HistoryHandler(), 1500);
     }
 
     @Override
@@ -86,78 +133,5 @@ public class OrderedHistoryActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private class Handler_1 implements Runnable {
-
-        @Override
-        public void run() {
-            CollectionReference colRef = db.collection("order");
-            for(int i = 0;i<idList.size();i++){
-                Log.d("ID", idList.get(i));
-                colRef.document(idList.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
-                            DocumentSnapshot doc = task.getResult();
-                            Map<String, Object> data = doc.getData();
-                            foodIdList.add(String.valueOf(data.get("foodID")));
-
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-    private class Handler_2 implements Runnable {
-
-        @Override
-        public void run() {
-            for(int i = 0;i<foodIdList.size();i++){
-                Log.d("ID", foodIdList.get(i));
-                db.collection("food")
-                        .document(foodIdList.get(i))
-                        .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
-                            DocumentSnapshot doc = task.getResult();
-                            Map<String, Object> data = doc.getData();
-                            list.add(new Food(doc.getId(),
-                                    String.valueOf(data.get("category")),
-                                    String.valueOf(data.get("description")),
-                                    String.valueOf(((List<String>)data.get("image")).get(0)),
-                                    String.valueOf(data.get("name")),
-                                    (List<HashMap<String, Object>>) data.get("options"),
-                                    String.valueOf(data.get("origin")),
-                                    Long.parseLong(String.valueOf(data.get("price"))),
-                                    (HashMap<String, Object>) data.get("seller")));
-                        }
-                    }
-                });
-            }
-        }
-    }
-
-    private class HistoryHandler implements Runnable {
-
-        @Override
-        public void run() {
-            ordered_recycler = binding.toolbar11.include.orderedRecycler;
-            ordered_recycler.setLayoutManager(new LinearLayoutManager(OrderedHistoryActivity.this));
-            ordered_recycler.setHasFixedSize(true);
-
-            mAdapter = new OrderedAdapter(list);
-            mAdapter.setOnItemClickListener(new OrderedAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(View v, int position) {
-                    Intent intent = new Intent(OrderedHistoryActivity.this, ProductActivity.class);
-                    intent.putExtra("select", list.get(position));
-                    startActivity(intent);
-                }
-            });
-            ordered_recycler.setAdapter(mAdapter);
-        }
     }
 }

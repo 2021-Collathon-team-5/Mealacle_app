@@ -173,7 +173,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
-                            android:text="@{cart.food.manufacture}"
+                            android:text="@{cart.food.sellerName}"
                             android:textSize="16dp"
                             android:textColor="@color/black"/>
 

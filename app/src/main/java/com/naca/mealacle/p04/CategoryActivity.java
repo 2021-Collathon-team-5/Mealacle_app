@@ -206,7 +206,7 @@ public class CategoryActivity extends AppCompatActivity {
                 food_recycler.setHasFixedSize(true);
 
                 Log.e("LIST_SIZE", Integer.toString(list.size()));
-                FoodListAdapter foodAdapter = new FoodListAdapter(list);
+                FoodListAdapter foodAdapter = new FoodListAdapter(list, CategoryActivity.this);
                 foodAdapter.setOnItemClickListener(new FoodListAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(View v, int position) {

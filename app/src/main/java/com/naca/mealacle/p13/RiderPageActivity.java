@@ -1,5 +1,6 @@
 package com.naca.mealacle.p13;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -118,10 +119,18 @@ public class RiderPageActivity extends AppCompatActivity {
 
     private class StoreHandler implements Runnable {
 
+        @SuppressLint("SetTextI18n")
         @Override
         public void run() {
+            int complete = 0;
+            int now = 0;
             for(int i = 0;i<orders.size();i++){
                 Order order = orders.get(i);
+                if(order.isComplete()){
+                    complete++;
+                } else {
+                    now++;
+                }
                 Store store = new Store();
                 final Food[] food = new Food[1];
                 final boolean[] temp = {true};
@@ -179,7 +188,9 @@ public class RiderPageActivity extends AppCompatActivity {
                 store.setCount(store.getCount() + order.getCount());
                 stores.add(store);
             }
-            Log.e("TEST", "endStoring");
+            binding.toolbar13.include.complete.setText(Integer.toString(complete) + "개");
+            binding.toolbar13.include.now.setText(Integer.toString(now) + "개");
+
         }
     }
 
@@ -208,7 +219,7 @@ public class RiderPageActivity extends AppCompatActivity {
             store_recycle.setLayoutManager(new LinearLayoutManager(RiderPageActivity.this));
             store_recycle.setHasFixedSize(true);
 
-            RiderPageAdapter mAdapter = new RiderPageAdapter(list);
+            RiderPageAdapter mAdapter = new RiderPageAdapter(list, RiderPageActivity.this);
             mAdapter.setOnItemClickListener(new RiderPageAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View v, int position) {
@@ -218,6 +229,7 @@ public class RiderPageActivity extends AppCompatActivity {
                 }
             });
             store_recycle.setAdapter(mAdapter);
+
         }
     }
 
